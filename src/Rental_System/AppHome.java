@@ -47,6 +47,7 @@ public class AppHome extends javax.swing.JFrame {
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 153));
+        jPanel1.setOpaque(false);
 
         jButton1.setText("jButton1");
 
@@ -103,15 +104,17 @@ public class AppHome extends javax.swing.JFrame {
 
         jPanel3.setBackground(new java.awt.Color(255, 153, 153));
         jPanel3.setOpaque(false);
-        jPanel3.setLayout(null);
+        jPanel3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jPanel5.setBackground(new java.awt.Color(0, 0, 102));
+        jPanel5.setBackground(new java.awt.Color(0, 0, 153));
+        jPanel5.setMaximumSize(new java.awt.Dimension(0, 0));
         jPanel5.setPreferredSize(new java.awt.Dimension(700, 300));
         jPanel5.setLayout(new java.awt.CardLayout());
+
+        loginView1.setOpaque(true);
         jPanel5.add(loginView1, "card2");
 
-        jPanel3.add(jPanel5);
-        jPanel5.setBounds(10, 11, 700, 300);
+        jPanel3.add(jPanel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 11, -1, -1));
 
         getContentPane().add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 117, 935, 330));
 
