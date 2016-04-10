@@ -5,6 +5,8 @@
  */
 package Rental_System;
 
+import java.awt.CardLayout;
+
 /**
  *
  * @author Simmigon Flagg
@@ -16,6 +18,12 @@ public class AppHome extends javax.swing.JFrame {
      */
     public AppHome() {
         initComponents();
+        btnAdmins.setVisible(false);
+        btnApplicants.setVisible(false);
+        btnEmployees.setVisible(false);
+        btnMaintenance.setVisible(false);
+        btnTenants.setVisible(false);
+
     }
 
     /**
@@ -27,15 +35,18 @@ public class AppHome extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jPanel1 = new javax.swing.JPanel();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
-        jButton4 = new javax.swing.JButton();
+        panelButton = new javax.swing.JPanel();
+        btnTenants = new javax.swing.JButton();
+        btnApplicants = new javax.swing.JButton();
+        btnAdmins = new javax.swing.JButton();
+        btnEmployees = new javax.swing.JButton();
+        btnMaintenance = new javax.swing.JButton();
+        btnLoginFrom = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         jPanel3 = new javax.swing.JPanel();
-        jPanel5 = new javax.swing.JPanel();
+        cardPanels = new javax.swing.JPanel();
         loginView1 = new Rental_System.LoginView();
+        adminView1 = new Rental_System.AdminView();
         Background = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -46,45 +57,75 @@ public class AppHome extends javax.swing.JFrame {
         setResizable(false);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jPanel1.setBackground(new java.awt.Color(255, 255, 153));
-        jPanel1.setOpaque(false);
+        panelButton.setBackground(new java.awt.Color(255, 255, 153));
+        panelButton.setOpaque(false);
 
-        jButton1.setText("jButton1");
+        btnTenants.setText("Tenants");
 
-        jButton2.setText("jButton1");
+        btnApplicants.setText("Applicants");
+        btnApplicants.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnApplicantsActionPerformed(evt);
+            }
+        });
 
-        jButton3.setText("jButton1");
+        btnAdmins.setText("Admin");
 
-        jButton4.setText("jButton1");
+        btnEmployees.setText("Employee");
 
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
+        btnMaintenance.setText("Maintenance");
+        btnMaintenance.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnMaintenanceActionPerformed(evt);
+            }
+        });
+
+        btnLoginFrom.setText("Login");
+        btnLoginFrom.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnLoginFromActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout panelButtonLayout = new javax.swing.GroupLayout(panelButton);
+        panelButton.setLayout(panelButtonLayout);
+        panelButtonLayout.setHorizontalGroup(
+            panelButtonLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelButtonLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jButton1)
+                .addComponent(btnTenants)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButton2)
+                .addComponent(btnApplicants)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButton3)
+                .addComponent(btnMaintenance)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButton4)
-                .addContainerGap(615, Short.MAX_VALUE))
+                .addComponent(btnLoginFrom)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 369, Short.MAX_VALUE)
+                .addComponent(btnAdmins)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(btnEmployees)
+                .addContainerGap())
         );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
+
+        panelButtonLayout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {btnAdmins, btnApplicants, btnEmployees, btnMaintenance, btnTenants});
+
+        panelButtonLayout.setVerticalGroup(
+            panelButtonLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelButtonLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton1)
-                    .addComponent(jButton2)
-                    .addComponent(jButton3)
-                    .addComponent(jButton4))
+                .addGroup(panelButtonLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnTenants)
+                    .addComponent(btnApplicants)
+                    .addComponent(btnEmployees)
+                    .addComponent(btnMaintenance)
+                    .addComponent(btnAdmins)
+                    .addComponent(btnLoginFrom))
                 .addContainerGap(16, Short.MAX_VALUE))
         );
 
-        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 450, 935, -1));
+        panelButtonLayout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {btnAdmins, btnApplicants, btnEmployees, btnMaintenance, btnTenants});
+
+        getContentPane().add(panelButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 450, 935, -1));
 
         jPanel2.setBackground(new java.awt.Color(102, 255, 255));
         jPanel2.setOpaque(false);
@@ -106,15 +147,16 @@ public class AppHome extends javax.swing.JFrame {
         jPanel3.setOpaque(false);
         jPanel3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jPanel5.setBackground(new java.awt.Color(0, 0, 153));
-        jPanel5.setMaximumSize(new java.awt.Dimension(0, 0));
-        jPanel5.setPreferredSize(new java.awt.Dimension(700, 300));
-        jPanel5.setLayout(new java.awt.CardLayout());
+        cardPanels.setBackground(new java.awt.Color(0, 0, 153));
+        cardPanels.setMaximumSize(new java.awt.Dimension(0, 0));
+        cardPanels.setPreferredSize(new java.awt.Dimension(700, 300));
+        cardPanels.setLayout(new java.awt.CardLayout());
 
         loginView1.setOpaque(true);
-        jPanel5.add(loginView1, "card2");
+        cardPanels.add(loginView1, "Login View");
+        cardPanels.add(adminView1, "Admins");
 
-        jPanel3.add(jPanel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 11, -1, -1));
+        jPanel3.add(cardPanels, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 11, -1, -1));
 
         getContentPane().add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 117, 935, 330));
 
@@ -125,6 +167,21 @@ public class AppHome extends javax.swing.JFrame {
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btnApplicantsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnApplicantsActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnApplicantsActionPerformed
+
+    private void btnMaintenanceActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMaintenanceActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnMaintenanceActionPerformed
+
+    private void btnLoginFromActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoginFromActionPerformed
+        // TODO add your handling code here:
+        System.out.println("Rental_System.AppHome.btnLoginFromActionPerformed()");
+        CardLayout showView = (CardLayout) cardPanels.getLayout();
+        showView.show(cardPanels, "Admins");
+    }//GEN-LAST:event_btnLoginFromActionPerformed
 
     /**
      * @param args the command line arguments
@@ -164,14 +221,17 @@ public class AppHome extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel Background;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
-    private javax.swing.JPanel jPanel1;
+    private Rental_System.AdminView adminView1;
+    private javax.swing.JButton btnAdmins;
+    private javax.swing.JButton btnApplicants;
+    private javax.swing.JButton btnEmployees;
+    private javax.swing.JButton btnLoginFrom;
+    private javax.swing.JButton btnMaintenance;
+    private javax.swing.JButton btnTenants;
+    public javax.swing.JPanel cardPanels;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
-    private javax.swing.JPanel jPanel5;
     private Rental_System.LoginView loginView1;
+    public javax.swing.JPanel panelButton;
     // End of variables declaration//GEN-END:variables
 }
