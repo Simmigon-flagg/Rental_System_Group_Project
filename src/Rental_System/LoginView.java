@@ -35,8 +35,6 @@ public class LoginView extends javax.swing.JPanel {
         jLabel2 = new javax.swing.JLabel();
         txtPasswordLogin = new javax.swing.JPasswordField();
         txtLoginName = new javax.swing.JTextField();
-        btnlogin = new javax.swing.JButton();
-        btnCancel = new javax.swing.JButton();
 
         setOpaque(false);
         setPreferredSize(new java.awt.Dimension(700, 308));
@@ -52,15 +50,6 @@ public class LoginView extends javax.swing.JPanel {
 
         txtLoginName.setText("admin");
 
-        btnlogin.setText("Login");
-        btnlogin.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnloginActionPerformed(evt);
-            }
-        });
-
-        btnCancel.setText("Cancel");
-
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -75,12 +64,7 @@ public class LoginView extends javax.swing.JPanel {
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jLabel2)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                                .addComponent(btnlogin, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(btnCancel, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(txtPasswordLogin))))
+                        .addComponent(txtPasswordLogin)))
                 .addContainerGap(88, Short.MAX_VALUE))
         );
 
@@ -97,11 +81,7 @@ public class LoginView extends javax.swing.JPanel {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
                     .addComponent(txtPasswordLogin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnlogin)
-                    .addComponent(btnCancel))
-                .addContainerGap(196, Short.MAX_VALUE))
+                .addContainerGap(225, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
@@ -126,26 +106,8 @@ public class LoginView extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton1ActionPerformed
 
-    private void btnloginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnloginActionPerformed
-        // TODO add your handling code here:
-
-        if ("admin".equals(txtLoginName.getText())) {
-            AppHome login = new AppHome();
-            login.panelButton.setVisible(true);
-            System.out.println("Rental_System.LoginView.btnloginActionPerformed()");
-            CardLayout showView = (CardLayout) login.cardPanels.getLayout();
-            showView.show(login.cardPanels, "Admins");
-
-        } else {
-        }
-
-
-    }//GEN-LAST:event_btnloginActionPerformed
-
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnCancel;
-    private javax.swing.JButton btnlogin;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;

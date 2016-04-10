@@ -16,13 +16,14 @@ public class AppHome extends javax.swing.JFrame {
     /**
      * Creates new form LoginView
      */
+    CardLayout showCardView = null;
+    private String CredentialsLevel = "";
+
     public AppHome() {
         initComponents();
-        btnAdmins.setVisible(false);
-        btnApplicants.setVisible(false);
-        btnEmployees.setVisible(false);
-        btnMaintenance.setVisible(false);
-        btnTenants.setVisible(false);
+        // Set when login
+
+        Credentials(CredentialsLevel);
 
     }
 
@@ -41,12 +42,18 @@ public class AppHome extends javax.swing.JFrame {
         btnAdmins = new javax.swing.JButton();
         btnEmployees = new javax.swing.JButton();
         btnMaintenance = new javax.swing.JButton();
-        btnLoginFrom = new javax.swing.JButton();
-        jPanel2 = new javax.swing.JPanel();
-        jPanel3 = new javax.swing.JPanel();
+        btnLogin = new javax.swing.JButton();
+        btnLoginCancel = new javax.swing.JButton();
+        jPanel1 = new javax.swing.JPanel();
+        lblLoginName = new javax.swing.JLabel();
+        PanelCard = new javax.swing.JPanel();
         cardPanels = new javax.swing.JPanel();
         loginView1 = new Rental_System.LoginView();
         adminView1 = new Rental_System.AdminView();
+        tenantsView1 = new Rental_System.TenantsView();
+        maintenanceView1 = new Rental_System.MaintenanceView();
+        applicantsView1 = new Rental_System.ApplicantsView();
+        clientView1 = new Rental_System.ClientView();
         Background = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -61,6 +68,11 @@ public class AppHome extends javax.swing.JFrame {
         panelButton.setOpaque(false);
 
         btnTenants.setText("Tenants");
+        btnTenants.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnTenantsActionPerformed(evt);
+            }
+        });
 
         btnApplicants.setText("Applicants");
         btnApplicants.addActionListener(new java.awt.event.ActionListener() {
@@ -80,10 +92,17 @@ public class AppHome extends javax.swing.JFrame {
             }
         });
 
-        btnLoginFrom.setText("Login");
-        btnLoginFrom.addActionListener(new java.awt.event.ActionListener() {
+        btnLogin.setText("Login");
+        btnLogin.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnLoginFromActionPerformed(evt);
+                btnLoginActionPerformed(evt);
+            }
+        });
+
+        btnLoginCancel.setText("Cancel");
+        btnLoginCancel.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnLoginCancelActionPerformed(evt);
             }
         });
 
@@ -97,17 +116,21 @@ public class AppHome extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnApplicants)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btnMaintenance)
+                .addComponent(btnMaintenance, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btnLoginFrom)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 369, Short.MAX_VALUE)
-                .addComponent(btnAdmins)
+                .addComponent(btnLogin, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(btnLoginCancel, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(btnAdmins, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnEmployees)
-                .addContainerGap())
+                .addContainerGap(175, Short.MAX_VALUE))
         );
 
-        panelButtonLayout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {btnAdmins, btnApplicants, btnEmployees, btnMaintenance, btnTenants});
+        panelButtonLayout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {btnAdmins, btnApplicants, btnEmployees, btnTenants});
+
+        panelButtonLayout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {btnLogin, btnLoginCancel});
 
         panelButtonLayout.setVerticalGroup(
             panelButtonLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -119,7 +142,8 @@ public class AppHome extends javax.swing.JFrame {
                     .addComponent(btnEmployees)
                     .addComponent(btnMaintenance)
                     .addComponent(btnAdmins)
-                    .addComponent(btnLoginFrom))
+                    .addComponent(btnLogin)
+                    .addComponent(btnLoginCancel))
                 .addContainerGap(16, Short.MAX_VALUE))
         );
 
@@ -127,25 +151,32 @@ public class AppHome extends javax.swing.JFrame {
 
         getContentPane().add(panelButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 450, 935, -1));
 
-        jPanel2.setBackground(new java.awt.Color(102, 255, 255));
-        jPanel2.setOpaque(false);
+        jPanel1.setPreferredSize(new java.awt.Dimension(958, 48));
 
-        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
-        jPanel2.setLayout(jPanel2Layout);
-        jPanel2Layout.setHorizontalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 940, Short.MAX_VALUE)
+        lblLoginName.setText("Welcome, ");
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(lblLoginName)
+                .addContainerGap(898, Short.MAX_VALUE))
         );
-        jPanel2Layout.setVerticalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 100, Short.MAX_VALUE)
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(lblLoginName)
+                .addContainerGap(23, Short.MAX_VALUE))
         );
 
-        getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 11, -1, -1));
+        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
 
-        jPanel3.setBackground(new java.awt.Color(255, 153, 153));
-        jPanel3.setOpaque(false);
-        jPanel3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        PanelCard.setBackground(new java.awt.Color(255, 153, 153));
+        PanelCard.setOpaque(false);
+        PanelCard.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         cardPanels.setBackground(new java.awt.Color(0, 0, 153));
         cardPanels.setMaximumSize(new java.awt.Dimension(0, 0));
@@ -155,10 +186,14 @@ public class AppHome extends javax.swing.JFrame {
         loginView1.setOpaque(true);
         cardPanels.add(loginView1, "Login View");
         cardPanels.add(adminView1, "Admins");
+        cardPanels.add(tenantsView1, "Tenants");
+        cardPanels.add(maintenanceView1, "Maintenance");
+        cardPanels.add(applicantsView1, "Applicants");
+        cardPanels.add(clientView1, "card7");
 
-        jPanel3.add(cardPanels, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 11, -1, -1));
+        PanelCard.add(cardPanels, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 11, -1, -1));
 
-        getContentPane().add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 117, 935, 330));
+        getContentPane().add(PanelCard, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 117, 935, 330));
 
         Background.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Rental_System/LoginBackground.JPG"))); // NOI18N
         Background.setPreferredSize(new java.awt.Dimension(955, 537));
@@ -170,18 +205,95 @@ public class AppHome extends javax.swing.JFrame {
 
     private void btnApplicantsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnApplicantsActionPerformed
         // TODO add your handling code here:
+showCardView.show(cardPanels, "Applicants");
     }//GEN-LAST:event_btnApplicantsActionPerformed
 
     private void btnMaintenanceActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMaintenanceActionPerformed
         // TODO add your handling code here:
+        showCardView.show(cardPanels, "Maintenance");
     }//GEN-LAST:event_btnMaintenanceActionPerformed
 
-    private void btnLoginFromActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoginFromActionPerformed
+    private void btnLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoginActionPerformed
+
+        String Credentials = "Admins";
+        Credentials(Credentials);
+
+
+    }//GEN-LAST:event_btnLoginActionPerformed
+
+    private void btnLoginCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoginCancelActionPerformed
         // TODO add your handling code here:
-        System.out.println("Rental_System.AppHome.btnLoginFromActionPerformed()");
-        CardLayout showView = (CardLayout) cardPanels.getLayout();
-        showView.show(cardPanels, "Admins");
-    }//GEN-LAST:event_btnLoginFromActionPerformed
+    }//GEN-LAST:event_btnLoginCancelActionPerformed
+
+    private void btnTenantsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTenantsActionPerformed
+        // TODO add your handling code here:
+        showCardView.show(cardPanels, "Tenants");
+    }//GEN-LAST:event_btnTenantsActionPerformed
+    public final void Credentials(String CredentialsLevel) {
+
+        String name = null;
+
+        switch (CredentialsLevel) {
+            case "Admins":
+                lblLoginName.setText(name + "Admin");//get user Name if admin;
+                showCardView.show(cardPanels, CredentialsLevel);
+                btnLogin.setVisible(false);
+                btnLoginCancel.setVisible(false);
+                btnAdmins.setVisible(true);
+                btnApplicants.setVisible(true);
+                btnEmployees.setVisible(true);
+                btnMaintenance.setVisible(true);
+                btnTenants.setVisible(true);
+                break;
+            case "Client":
+
+                lblLoginName.setText(name + "");//
+                showCardView.show(cardPanels, CredentialsLevel);
+                btnMaintenance.setVisible(true);
+                btnTenants.setVisible(true);
+                btnApplicants.setVisible(true);
+                btnAdmins.setVisible(false);
+                btnEmployees.setVisible(false);
+                break;
+
+            case "Maintenance":
+
+                lblLoginName.setText(name + "");//
+                showCardView.show(cardPanels, CredentialsLevel);
+                btnLogin.setVisible(false);
+                btnLoginCancel.setVisible(false);
+                btnApplicants.setVisible(true);
+                btnMaintenance.setVisible(true);
+                btnTenants.setVisible(true);
+                btnAdmins.setVisible(false);
+                btnEmployees.setVisible(false);
+                break;
+
+            case "Applicants":
+
+                lblLoginName.setText(name + "");//
+                showCardView.show(cardPanels, CredentialsLevel);
+                btnLogin.setVisible(false);
+                btnLoginCancel.setVisible(false);
+                btnApplicants.setVisible(true);
+                btnMaintenance.setVisible(true);
+                btnTenants.setVisible(true);
+                btnAdmins.setVisible(false);
+                btnEmployees.setVisible(false);
+                break;
+            default:
+
+                lblLoginName.setText("");
+                showCardView = (CardLayout) cardPanels.getLayout();
+                btnApplicants.setVisible(false);
+                btnMaintenance.setVisible(false);
+                btnTenants.setVisible(false);
+                btnAdmins.setVisible(false);
+                btnEmployees.setVisible(false);
+                break;
+        }
+
+    }
 
     /**
      * @param args the command line arguments
@@ -221,17 +333,23 @@ public class AppHome extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel Background;
+    private javax.swing.JPanel PanelCard;
     private Rental_System.AdminView adminView1;
+    private Rental_System.ApplicantsView applicantsView1;
     private javax.swing.JButton btnAdmins;
     private javax.swing.JButton btnApplicants;
     private javax.swing.JButton btnEmployees;
-    private javax.swing.JButton btnLoginFrom;
+    private javax.swing.JButton btnLogin;
+    private javax.swing.JButton btnLoginCancel;
     private javax.swing.JButton btnMaintenance;
     private javax.swing.JButton btnTenants;
     public javax.swing.JPanel cardPanels;
-    private javax.swing.JPanel jPanel2;
-    private javax.swing.JPanel jPanel3;
+    private Rental_System.ClientView clientView1;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JLabel lblLoginName;
     private Rental_System.LoginView loginView1;
+    private Rental_System.MaintenanceView maintenanceView1;
     public javax.swing.JPanel panelButton;
+    private Rental_System.TenantsView tenantsView1;
     // End of variables declaration//GEN-END:variables
 }
