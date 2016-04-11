@@ -44,6 +44,7 @@ public class AppHome extends javax.swing.JFrame {
         btnMaintenance = new javax.swing.JButton();
         btnLogin = new javax.swing.JButton();
         btnLoginCancel = new javax.swing.JButton();
+        btnMaintenance1 = new javax.swing.JButton();
         jPanel1 = new javax.swing.JPanel();
         lblLoginName = new javax.swing.JLabel();
         PanelCard = new javax.swing.JPanel();
@@ -114,6 +115,13 @@ public class AppHome extends javax.swing.JFrame {
             }
         });
 
+        btnMaintenance1.setText("Maintenance");
+        btnMaintenance1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnMaintenance1ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout panelButtonLayout = new javax.swing.GroupLayout(panelButton);
         panelButton.setLayout(panelButtonLayout);
         panelButtonLayout.setHorizontalGroup(
@@ -126,6 +134,8 @@ public class AppHome extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnMaintenance, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(btnMaintenance1, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(btnLogin, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnLoginCancel, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -133,7 +143,7 @@ public class AppHome extends javax.swing.JFrame {
                 .addComponent(btnAdmins, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnEmployees)
-                .addContainerGap(175, Short.MAX_VALUE))
+                .addGap(83, 83, 83))
         );
 
         panelButtonLayout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {btnAdmins, btnApplicants, btnEmployees, btnTenants});
@@ -151,7 +161,8 @@ public class AppHome extends javax.swing.JFrame {
                     .addComponent(btnMaintenance)
                     .addComponent(btnAdmins)
                     .addComponent(btnLogin)
-                    .addComponent(btnLoginCancel))
+                    .addComponent(btnLoginCancel)
+                    .addComponent(btnMaintenance1))
                 .addContainerGap(16, Short.MAX_VALUE))
         );
 
@@ -249,6 +260,10 @@ public class AppHome extends javax.swing.JFrame {
         // TODO add your handling code here:
         showCardView.show(cardPanels, "Clients");
     }//GEN-LAST:event_btnEmployeesActionPerformed
+
+    private void btnMaintenance1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMaintenance1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnMaintenance1ActionPerformed
     public final void Credentials(String CredentialsLevel) {
 
         String name = null;
@@ -340,6 +355,7 @@ public class AppHome extends javax.swing.JFrame {
     private javax.swing.JButton btnLogin;
     private javax.swing.JButton btnLoginCancel;
     private javax.swing.JButton btnMaintenance;
+    private javax.swing.JButton btnMaintenance1;
     private javax.swing.JButton btnTenants;
     public javax.swing.JPanel cardPanels;
     private Rental_System.ClientView clientView1;
