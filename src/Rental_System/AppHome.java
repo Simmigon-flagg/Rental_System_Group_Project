@@ -16,6 +16,7 @@ public class AppHome extends javax.swing.JFrame {
     /**
      * Creates new form LoginView
      */
+    static Database connection = new Database();
     CardLayout showCardView = null;
     private String CredentialsLevel = "";
 
@@ -234,11 +235,9 @@ public class AppHome extends javax.swing.JFrame {
 
     private void btnLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoginActionPerformed
 
-        
-      //  String Credentials = "Client";
-        String Credentials = "Admins";
-        Credentials(Credentials);
-
+        Login my = new Login();
+        Object[] user = my.LOGIN();
+        lblLoginName.setText(user[1].toString());
 
     }//GEN-LAST:event_btnLoginActionPerformed
 
@@ -293,7 +292,6 @@ public class AppHome extends javax.swing.JFrame {
                 btnEmployees.setVisible(false);
                 break;
 
-          
             default:
 
                 lblLoginName.setText("");

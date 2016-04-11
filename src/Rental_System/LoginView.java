@@ -48,7 +48,7 @@ public class LoginView extends javax.swing.JPanel {
 
         txtPasswordLogin.setText("admin");
 
-        txtLoginName.setText("admin");
+        txtLoginName.setText("admin@admin.com");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -112,6 +112,6 @@ public class LoginView extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
     public javax.swing.JTextField txtLoginName;
-    private javax.swing.JPasswordField txtPasswordLogin;
+    public javax.swing.JPasswordField txtPasswordLogin;
     // End of variables declaration//GEN-END:variables
 }

@@ -11,6 +11,7 @@ package Rental_System;
  */
 import java.sql.*;
 import java.util.ArrayList;
+import java.util.Arrays;
 
 public class Database {
 
@@ -201,7 +202,6 @@ public class Database {
         ArrayList<Tenants> getTenant = new ArrayList<>();
 
         sql = "SELECT "
-          
                 + "firstName,"
                 + "lastName,"
                 + "phoneNumber,"
@@ -244,6 +244,7 @@ public class Database {
 
     public Object[] isLogin(String email, String password) {
         boolean isLogin = false;
+
         Object[] user = new Object[2];
         user[0] = isLogin;
         sql = "SELECT userName,pass,firstName FROM user"
