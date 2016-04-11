@@ -57,10 +57,8 @@ public class AppHome extends javax.swing.JFrame {
         Background = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setMaximumSize(new java.awt.Dimension(0, 0));
         setMinimumSize(new java.awt.Dimension(958, 538));
         setName("Application"); // NOI18N
-        setPreferredSize(new java.awt.Dimension(958, 538));
         setResizable(false);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -82,8 +80,18 @@ public class AppHome extends javax.swing.JFrame {
         });
 
         btnAdmins.setText("Admin");
+        btnAdmins.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAdminsActionPerformed(evt);
+            }
+        });
 
         btnEmployees.setText("Employee");
+        btnEmployees.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEmployeesActionPerformed(evt);
+            }
+        });
 
         btnMaintenance.setText("Maintenance");
         btnMaintenance.addActionListener(new java.awt.event.ActionListener() {
@@ -189,7 +197,7 @@ public class AppHome extends javax.swing.JFrame {
         cardPanels.add(tenantsView1, "Tenants");
         cardPanels.add(maintenanceView1, "Maintenance");
         cardPanels.add(applicantsView1, "Applicants");
-        cardPanels.add(clientView1, "card7");
+        cardPanels.add(clientView1, "Clients");
 
         PanelCard.add(cardPanels, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 11, -1, -1));
 
@@ -205,7 +213,7 @@ public class AppHome extends javax.swing.JFrame {
 
     private void btnApplicantsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnApplicantsActionPerformed
         // TODO add your handling code here:
-showCardView.show(cardPanels, "Applicants");
+        showCardView.show(cardPanels, "Applicants");
     }//GEN-LAST:event_btnApplicantsActionPerformed
 
     private void btnMaintenanceActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMaintenanceActionPerformed
@@ -215,6 +223,8 @@ showCardView.show(cardPanels, "Applicants");
 
     private void btnLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoginActionPerformed
 
+        
+      //  String Credentials = "Client";
         String Credentials = "Admins";
         Credentials(Credentials);
 
@@ -229,6 +239,16 @@ showCardView.show(cardPanels, "Applicants");
         // TODO add your handling code here:
         showCardView.show(cardPanels, "Tenants");
     }//GEN-LAST:event_btnTenantsActionPerformed
+
+    private void btnAdminsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAdminsActionPerformed
+        // TODO add your handling code here:
+        showCardView.show(cardPanels, "Admins");
+    }//GEN-LAST:event_btnAdminsActionPerformed
+
+    private void btnEmployeesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEmployeesActionPerformed
+        // TODO add your handling code here:
+        showCardView.show(cardPanels, "Clients");
+    }//GEN-LAST:event_btnEmployeesActionPerformed
     public final void Credentials(String CredentialsLevel) {
 
         String name = null;
@@ -249,38 +269,16 @@ showCardView.show(cardPanels, "Applicants");
 
                 lblLoginName.setText(name + "");//
                 showCardView.show(cardPanels, CredentialsLevel);
-                btnMaintenance.setVisible(true);
-                btnTenants.setVisible(true);
-                btnApplicants.setVisible(true);
-                btnAdmins.setVisible(false);
-                btnEmployees.setVisible(false);
-                break;
-
-            case "Maintenance":
-
-                lblLoginName.setText(name + "");//
-                showCardView.show(cardPanels, CredentialsLevel);
                 btnLogin.setVisible(false);
                 btnLoginCancel.setVisible(false);
-                btnApplicants.setVisible(true);
                 btnMaintenance.setVisible(true);
                 btnTenants.setVisible(true);
+                btnApplicants.setVisible(true);
                 btnAdmins.setVisible(false);
                 btnEmployees.setVisible(false);
                 break;
 
-            case "Applicants":
-
-                lblLoginName.setText(name + "");//
-                showCardView.show(cardPanels, CredentialsLevel);
-                btnLogin.setVisible(false);
-                btnLoginCancel.setVisible(false);
-                btnApplicants.setVisible(true);
-                btnMaintenance.setVisible(true);
-                btnTenants.setVisible(true);
-                btnAdmins.setVisible(false);
-                btnEmployees.setVisible(false);
-                break;
+          
             default:
 
                 lblLoginName.setText("");
