@@ -17,7 +17,7 @@ public class Login {
     static Database logins = new Database();
     LoginView vCom = new LoginView();
 
-    public Object[] LOGIN() {
+    public Object[] login() {
         
         Object[] user = null;
       

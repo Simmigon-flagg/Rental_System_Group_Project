@@ -17,13 +17,14 @@ public class AppHome extends javax.swing.JFrame {
      * Creates new form LoginView
      */
     static Database connection = new Database();
+    Login user = new Login();
     CardLayout showCardView = null;
+
     private String CredentialsLevel = "";
 
     public AppHome() {
         initComponents();
         // Set when login
-
         Credentials(CredentialsLevel);
 
     }
@@ -45,7 +46,7 @@ public class AppHome extends javax.swing.JFrame {
         btnMaintenance = new javax.swing.JButton();
         btnLogin = new javax.swing.JButton();
         btnLoginCancel = new javax.swing.JButton();
-        btnMaintenance1 = new javax.swing.JButton();
+        btnReports = new javax.swing.JButton();
         jPanel1 = new javax.swing.JPanel();
         lblLoginName = new javax.swing.JLabel();
         PanelCard = new javax.swing.JPanel();
@@ -56,6 +57,7 @@ public class AppHome extends javax.swing.JFrame {
         maintenanceView1 = new Rental_System.MaintenanceView();
         applicantsView1 = new Rental_System.ApplicantsView();
         clientView1 = new Rental_System.ClientView();
+        reportsView1 = new Rental_System.ReportsView();
         Background = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -116,10 +118,10 @@ public class AppHome extends javax.swing.JFrame {
             }
         });
 
-        btnMaintenance1.setText("Maintenance");
-        btnMaintenance1.addActionListener(new java.awt.event.ActionListener() {
+        btnReports.setText("Reports");
+        btnReports.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnMaintenance1ActionPerformed(evt);
+                btnReportsActionPerformed(evt);
             }
         });
 
@@ -135,7 +137,7 @@ public class AppHome extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnMaintenance, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btnMaintenance1, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btnReports, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(btnLogin, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -163,7 +165,7 @@ public class AppHome extends javax.swing.JFrame {
                     .addComponent(btnAdmins)
                     .addComponent(btnLogin)
                     .addComponent(btnLoginCancel)
-                    .addComponent(btnMaintenance1))
+                    .addComponent(btnReports))
                 .addContainerGap(16, Short.MAX_VALUE))
         );
 
@@ -210,6 +212,7 @@ public class AppHome extends javax.swing.JFrame {
         cardPanels.add(maintenanceView1, "Maintenance");
         cardPanels.add(applicantsView1, "Applicants");
         cardPanels.add(clientView1, "Clients");
+        cardPanels.add(reportsView1, "Reports");
 
         PanelCard.add(cardPanels, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 11, -1, -1));
 
@@ -235,14 +238,22 @@ public class AppHome extends javax.swing.JFrame {
 
     private void btnLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoginActionPerformed
 
-        Login my = new Login();
-        Object[] user = my.LOGIN();
-        lblLoginName.setText(user[1].toString());
+        Object[] login = user.login();
+        lblLoginName.setText(login[1].toString());
+        System.out.println();
+        if ((boolean)login[0]) {            
+            showCardView.show(cardPanels, "Admins");
+            Credentials("Admins");
+        }else{
+             Credentials("Clients");
+        }
+       
 
     }//GEN-LAST:event_btnLoginActionPerformed
 
     private void btnLoginCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoginCancelActionPerformed
         // TODO add your handling code here:
+       
     }//GEN-LAST:event_btnLoginCancelActionPerformed
 
     private void btnTenantsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTenantsActionPerformed
@@ -260,9 +271,10 @@ public class AppHome extends javax.swing.JFrame {
         showCardView.show(cardPanels, "Clients");
     }//GEN-LAST:event_btnEmployeesActionPerformed
 
-    private void btnMaintenance1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMaintenance1ActionPerformed
+    private void btnReportsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnReportsActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_btnMaintenance1ActionPerformed
+        showCardView.show(cardPanels, "Reports");
+    }//GEN-LAST:event_btnReportsActionPerformed
     public final void Credentials(String CredentialsLevel) {
 
         String name = null;
@@ -271,25 +283,32 @@ public class AppHome extends javax.swing.JFrame {
             case "Admins":
                 lblLoginName.setText(name + "Admin");//get user Name if admin;
                 showCardView.show(cardPanels, CredentialsLevel);
-                btnLogin.setVisible(false);
-                btnLoginCancel.setVisible(false);
+
                 btnAdmins.setVisible(true);
                 btnApplicants.setVisible(true);
                 btnEmployees.setVisible(true);
                 btnMaintenance.setVisible(true);
                 btnTenants.setVisible(true);
+                btnReports.setVisible(true);
+                
+                btnLogin.setVisible(false);
+                btnLoginCancel.setVisible(false);
                 break;
             case "Client":
 
                 lblLoginName.setText(name + "");//
                 showCardView.show(cardPanels, CredentialsLevel);
-                btnLogin.setVisible(false);
-                btnLoginCancel.setVisible(false);
+
                 btnMaintenance.setVisible(true);
                 btnTenants.setVisible(true);
                 btnApplicants.setVisible(true);
+                btnReports.setVisible(true);
+
                 btnAdmins.setVisible(false);
                 btnEmployees.setVisible(false);
+                btnLogin.setVisible(false);
+                btnLoginCancel.setVisible(false);
+
                 break;
 
             default:
@@ -301,6 +320,7 @@ public class AppHome extends javax.swing.JFrame {
                 btnTenants.setVisible(false);
                 btnAdmins.setVisible(false);
                 btnEmployees.setVisible(false);
+                btnReports.setVisible(false);
                 break;
         }
 
@@ -353,7 +373,7 @@ public class AppHome extends javax.swing.JFrame {
     private javax.swing.JButton btnLogin;
     private javax.swing.JButton btnLoginCancel;
     private javax.swing.JButton btnMaintenance;
-    private javax.swing.JButton btnMaintenance1;
+    private javax.swing.JButton btnReports;
     private javax.swing.JButton btnTenants;
     public javax.swing.JPanel cardPanels;
     private Rental_System.ClientView clientView1;
@@ -362,6 +382,7 @@ public class AppHome extends javax.swing.JFrame {
     private Rental_System.LoginView loginView1;
     private Rental_System.MaintenanceView maintenanceView1;
     public javax.swing.JPanel panelButton;
+    private Rental_System.ReportsView reportsView1;
     private Rental_System.TenantsView tenantsView1;
     // End of variables declaration//GEN-END:variables
 }

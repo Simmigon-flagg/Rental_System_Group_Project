@@ -5,10 +5,18 @@
  */
 package Rental_System;
 
+
+
 /**
  *
  * @author Simmigon Flagg
  */
 public class Clients {
-    
+
+    static Database Client = new Database();
+
+    public static void main(String[] args) {
+        Client.setClient("Simmigon", "Flagg", "Don", "Doooo");
+    }
+
 }

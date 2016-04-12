@@ -42,7 +42,7 @@ public class LoginView extends javax.swing.JPanel {
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
         jPanel1.setBorder(javax.swing.BorderFactory.createEtchedBorder(new java.awt.Color(0, 255, 255), new java.awt.Color(0, 0, 0)));
 
-        jLabel1.setText("N:ame");
+        jLabel1.setText("Name");
 
         jLabel2.setText("Password:");
 

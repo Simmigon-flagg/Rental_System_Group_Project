@@ -57,7 +57,7 @@
                   <EmptySpace max="-2" attributes="0"/>
                   <Component id="btnMaintenance" min="-2" pref="102" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
-                  <Component id="btnMaintenance1" min="-2" pref="102" max="-2" attributes="0"/>
+                  <Component id="btnReports" min="-2" pref="102" max="-2" attributes="0"/>
                   <EmptySpace max="32767" attributes="0"/>
                   <Component id="btnLogin" linkSize="3" min="-2" pref="102" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
@@ -82,7 +82,7 @@
                       <Component id="btnAdmins" linkSize="2" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="btnLogin" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="btnLoginCancel" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="btnMaintenance1" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="btnReports" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace pref="16" max="32767" attributes="0"/>
               </Group>
@@ -146,12 +146,12 @@
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnLoginCancelActionPerformed"/>
           </Events>
         </Component>
-        <Component class="javax.swing.JButton" name="btnMaintenance1">
+        <Component class="javax.swing.JButton" name="btnReports">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Maintenance"/>
+            <Property name="text" type="java.lang.String" value="Reports"/>
           </Properties>
           <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnMaintenance1ActionPerformed"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnReportsActionPerformed"/>
           </Events>
         </Component>
       </SubComponents>
@@ -278,6 +278,13 @@
               <Constraints>
                 <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignCardLayout" value="org.netbeans.modules.form.compat2.layouts.DesignCardLayout$CardConstraintsDescription">
                   <CardConstraints cardName="Clients"/>
+                </Constraint>
+              </Constraints>
+            </Component>
+            <Component class="Rental_System.ReportsView" name="reportsView1">
+              <Constraints>
+                <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignCardLayout" value="org.netbeans.modules.form.compat2.layouts.DesignCardLayout$CardConstraintsDescription">
+                  <CardConstraints cardName="Reports"/>
                 </Constraint>
               </Constraints>
             </Component>

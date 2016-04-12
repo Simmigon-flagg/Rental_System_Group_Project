@@ -12,9 +12,15 @@ package Rental_System;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Date;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class Database {
 
+    Date date = new Date();
+    String[] time;
+    String currentTime = "";
     Statement dbStatement = null;
     static Connection conn = null;
     String sql = null;
@@ -39,6 +45,89 @@ public class Database {
     }//end of database connection
 
     public ArrayList<Object> getAllUser() {
+        sql = "SELECT * FROM user;";
+        ArrayList<Object> person = new ArrayList<>();
+        try {
+
+            dbStatement = DatabaseConn().createStatement();
+
+            rs = dbStatement.executeQuery(sql);
+
+            while (rs.next()) {
+                person.add(rs.getInt("iduser"));
+                person.add(rs.getString("firstName"));
+                person.add(rs.getString("lastName"));
+                person.add(rs.getString("userName"));
+                person.add(rs.getString("dateOfBirth"));
+                person.add(rs.getString("pass"));
+            }
+
+            conn.close();
+
+        } catch (Exception e) {
+            System.out.println("getAllUser: " + e);
+            return null;
+        }
+        return person;
+
+    }//End of getAllUser
+
+    public ResultSet setClient(String firstName, String lastName, String userName, String dateOfBirth) {
+
+        date = new Date();
+        time = date.toString().split(" ");
+        ResultSet ClientRs = null;
+        for (int i = 0; i < time.length; i++) {
+            String time1 = time[i];
+            System.out.println("time: [" + i + "] " + time[i]);
+            currentTime += time1 + " ";
+        }
+
+        sql = "INSERT INTO clients "
+                + "(firstName,lastName,userName,dateOfBirth,date_and_time) "
+                + "VALUES "
+                + "('"
+                + "" + firstName + "',"
+                + "'" + lastName + "',"
+                + "'" + userName + "',"
+                + "'" + dateOfBirth + "',"
+                + "'" + currentTime + "');";
+        try {
+            dbStatement = DatabaseConn().createStatement();
+            dbStatement.executeUpdate(sql);
+            //This is for the table model
+            ClientRs = dbStatement.executeQuery("SELECT * FROM clients");
+
+        } catch (SQLException ex) {
+            Logger.getLogger(Database.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        // return ClientRs;
+        //   return ClientRs;
+        return ClientRs;
+
+    }//End of getAllUser
+
+    //setClientTable
+    public ResultSet setClientTable() {
+
+        ResultSet ClientsTable = null;
+        try {
+            dbStatement = DatabaseConn().createStatement();
+             ClientsTable = dbStatement.executeQuery("SELECT firstName as Employee FROM clients");
+            //dbStatement.executeUpdate(sql);
+            //This is for the table model
+           
+
+        } catch (SQLException ex) {
+            Logger.getLogger(Database.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        // return ClientRs;
+        //   return ClientRs;
+        return ClientsTable;
+
+    }//End of setClientTable
+
+    public ArrayList<Object> getClient() {
         sql = "SELECT * FROM user;";
         ArrayList<Object> person = new ArrayList<>();
         try {
@@ -301,6 +390,7 @@ public class Database {
                 person.add(rs.getString("userName"));
                 person.add(rs.getString("dateOfBirth"));
                 person.add(rs.getString("pass"));
+
             }
 
             conn.close();
@@ -312,6 +402,14 @@ public class Database {
         return temp;
 
     }//End of getAllUser
+
+    public void closeDatabase() {
+        try {
+            conn.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(Database.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
 
     //Update
     //Create
