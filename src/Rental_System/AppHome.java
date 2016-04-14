@@ -6,6 +6,10 @@
 package Rental_System;
 
 import java.awt.CardLayout;
+import java.sql.ResultSet;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.GregorianCalendar;
 
 /**
  *
@@ -17,7 +21,7 @@ public class AppHome extends javax.swing.JFrame {
      * Creates new form LoginView
      */
     static Database connection = new Database();
-    Login user = new Login();
+    LoginController user = new LoginController();
     CardLayout showCardView = null;
 
     private String CredentialsLevel = "";
@@ -26,6 +30,21 @@ public class AppHome extends javax.swing.JFrame {
         initComponents();
         // Set when login
         Credentials(CredentialsLevel);
+        String ccurrentTime;
+        // Date date;
+        new Thread() {
+            @Override
+            public void run() {
+                while (true) {
+                   
+                    String[] time;
+                    Date date = new Date();
+                    labelTime.setText(date.toString());
+
+                }
+
+            }
+        }.start();
 
     }
 
@@ -49,6 +68,7 @@ public class AppHome extends javax.swing.JFrame {
         btnReports = new javax.swing.JButton();
         jPanel1 = new javax.swing.JPanel();
         lblLoginName = new javax.swing.JLabel();
+        labelTime = new javax.swing.JLabel();
         PanelCard = new javax.swing.JPanel();
         cardPanels = new javax.swing.JPanel();
         loginView1 = new Rental_System.LoginView();
@@ -138,7 +158,7 @@ public class AppHome extends javax.swing.JFrame {
                 .addComponent(btnMaintenance, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnReports, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnLogin, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnLoginCancel, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -183,14 +203,17 @@ public class AppHome extends javax.swing.JFrame {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(lblLoginName)
-                .addContainerGap(898, Short.MAX_VALUE))
+                .addComponent(lblLoginName, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 570, Short.MAX_VALUE)
+                .addComponent(labelTime, javax.swing.GroupLayout.PREFERRED_SIZE, 227, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(lblLoginName)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblLoginName)
+                    .addComponent(labelTime, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(23, Short.MAX_VALUE))
         );
 
@@ -241,19 +264,19 @@ public class AppHome extends javax.swing.JFrame {
         Object[] login = user.login();
         lblLoginName.setText(login[1].toString());
         System.out.println();
-        if ((boolean)login[0]) {            
+        if ((boolean) login[0]) {
             showCardView.show(cardPanels, "Admins");
             Credentials("Admins");
-        }else{
-             Credentials("Clients");
+        } else {
+            Credentials("Clients");
         }
-       
+
 
     }//GEN-LAST:event_btnLoginActionPerformed
 
     private void btnLoginCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoginCancelActionPerformed
         // TODO add your handling code here:
-       
+
     }//GEN-LAST:event_btnLoginCancelActionPerformed
 
     private void btnTenantsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTenantsActionPerformed
@@ -290,7 +313,7 @@ public class AppHome extends javax.swing.JFrame {
                 btnMaintenance.setVisible(true);
                 btnTenants.setVisible(true);
                 btnReports.setVisible(true);
-                
+
                 btnLogin.setVisible(false);
                 btnLoginCancel.setVisible(false);
                 break;
@@ -378,6 +401,7 @@ public class AppHome extends javax.swing.JFrame {
     public javax.swing.JPanel cardPanels;
     private Rental_System.ClientView clientView1;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JLabel labelTime;
     private javax.swing.JLabel lblLoginName;
     private Rental_System.LoginView loginView1;
     private Rental_System.MaintenanceView maintenanceView1;

@@ -11,7 +11,6 @@ package Rental_System;
  */
 import java.sql.*;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -76,7 +75,7 @@ public class Database {
 
         date = new Date();
         time = date.toString().split(" ");
-        ResultSet ClientRs = null;
+        ResultSet table = null;
         for (int i = 0; i < time.length; i++) {
             String time1 = time[i];
             System.out.println("time: [" + i + "] " + time[i]);
@@ -96,16 +95,51 @@ public class Database {
             dbStatement = DatabaseConn().createStatement();
             dbStatement.executeUpdate(sql);
             //This is for the table model
-            ClientRs = dbStatement.executeQuery("SELECT * FROM clients");
+            table = dbStatement.executeQuery("SELECT * FROM clients");
 
         } catch (SQLException ex) {
             Logger.getLogger(Database.class.getName()).log(Level.SEVERE, null, ex);
         }
         // return ClientRs;
         //   return ClientRs;
-        return ClientRs;
+        return table;
 
     }//End of getAllUser
+
+    public ResultSet addNewAdmin(String firstName, String lastName, String dateOfBirth, StringBuilder password) {
+
+        date = new Date();
+        time = date.toString().split(" ");
+        ResultSet table = null;
+        for (int i = 0; i < time.length; i++) {
+            String time1 = time[i];
+            System.out.println("time: [" + i + "] " + time[i]);
+            currentTime += time1 + " ";
+        }
+
+        sql = "INSERT INTO user \n"
+                + "                (firstName,lastName,userName,dateOfBirth,pass,is_admin,is_client) \n"
+                + "                VALUES \n"
+                + "                ( '"+firstName+"',\n"
+                + "               '" + lastName + " ',\n"
+                + "               ' " + firstName + "',\n"
+                + "              '" + dateOfBirth + "',\n"
+                + "               '" + password + " ',\n"
+                + "                '" + 1 + "',\n"
+                + "               '" + 1 + "');";
+        try {
+            dbStatement = DatabaseConn().createStatement();
+            dbStatement.executeUpdate(sql);
+
+            table = dbStatement.executeQuery("SELECT * FROM clients");
+
+        } catch (SQLException ex) {
+            Logger.getLogger(Database.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        return table;
+
+    }//End of addNewAdmin
 
     //setClientTable
     public ResultSet setClientTable() {
@@ -113,10 +147,7 @@ public class Database {
         ResultSet ClientsTable = null;
         try {
             dbStatement = DatabaseConn().createStatement();
-             ClientsTable = dbStatement.executeQuery("SELECT firstName as Employee FROM clients");
-            //dbStatement.executeUpdate(sql);
-            //This is for the table model
-           
+            ClientsTable = dbStatement.executeQuery("SELECT firstName as Employee FROM user WHERE is_client = 1");
 
         } catch (SQLException ex) {
             Logger.getLogger(Database.class.getName()).log(Level.SEVERE, null, ex);
@@ -126,6 +157,25 @@ public class Database {
         return ClientsTable;
 
     }//End of setClientTable
+
+    public ResultSet setTenantsTable() {
+
+        ResultSet table = null;
+        try {
+            dbStatement = DatabaseConn().createStatement();
+            table = dbStatement.executeQuery("SELECT firstName,lastName,phoneNumber, price ,location, aptNumber,numberOfBedrooms,numberOfBathRoom FROM user INNER JOIN applicant\n"
+                    + "                   ON user.iduser=applicant.iduser\n"
+                    + "				   INNER JOIN apartmentlocation\n"
+                    + "                   ON applicant.iduser=apartmentlocation.iduser WHERE accepted = 1;");
+
+        } catch (SQLException ex) {
+            Logger.getLogger(Database.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        // return ClientRs;
+        //   return ClientRs;
+        return table;
+
+    }//End of setTenant
 
     public ArrayList<Object> getClient() {
         sql = "SELECT * FROM user;";
@@ -184,6 +234,104 @@ public class Database {
 
     }//End of getAllLocationAndPrice
 
+    public ArrayList getAdminTable(String admin_Id) {
+
+        ResultSet table = null;
+        ArrayList<String> admin = new ArrayList<>();
+        try {
+            dbStatement = DatabaseConn().createStatement();
+            table = dbStatement.executeQuery("SELECT iduser,firstName,lastName,pass FROM user WHERE iduser = '" + admin_Id + "';");
+
+            while (table.next()) {
+                admin.add(table.getString("iduser"));
+                admin.add(table.getString("firstName"));
+                admin.add(table.getString("lastName"));
+                admin.add(table.getString("pass"));
+
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(Database.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        System.out.println("admin: " + admin);
+
+        return admin;
+
+    }//End of getAdminTable
+
+    public ArrayList updateAdminTable(String admin_Id, String first, String last, String pass) {
+        String sql;
+        ArrayList<String> admin = new ArrayList<>();
+        try {
+            dbStatement = DatabaseConn().createStatement();
+
+            sql = "UPDATE apartrmentrentaldb.user SET firstName = '" + first + "',lastName = '" + last + "',pass = '" + pass + "' WHERE iduser = '" + admin_Id + "';";
+            dbStatement.executeUpdate(sql);
+
+        } catch (SQLException ex) {
+            Logger.getLogger(Database.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        System.out.println("admin: " + admin);
+
+        return admin;
+
+    }//End of updateAdminTable
+
+    public ResultSet setAdminTable() {
+
+        ResultSet table = null;
+        try {
+            dbStatement = DatabaseConn().createStatement();
+
+            table = dbStatement.executeQuery("SELECT iduser ,firstName,lastName,pass FROM apartrmentrentaldb.user WHERE is_admin = 1;");
+        } catch (SQLException ex) {
+            Logger.getLogger(Database.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        // return ClientRs;
+        //   return ClientRs;
+        return table;
+
+    }//End of setApplicationTable
+
+    public ResultSet setApplicationTable() {
+
+        ResultSet table = null;
+        try {
+            dbStatement = DatabaseConn().createStatement();
+            table = dbStatement.executeQuery("SELECT "
+                    + "firstName,"
+                    + "lastName,"
+                    // "userName,"
+                    // "dateOfBirth,"
+                    //               + "pass,"
+                    + "accepted,"
+                    + "socialSecurity,"
+                    //                + "streetAddress,"
+                    //                + "City,"
+                    //                + "Zip,"
+                    + "phoneNumber,"
+                    // "employedBy,"
+                    // "JobTitle,\n"
+                    // "monthlyGrossPay,"
+                    + "criminalBackgroundCheck "
+                    //                + "location,"
+                    //                + "aptNumber,"
+                    //                + "numberOfBedrooms,"
+                    //                + "price\n"
+                    + "FROM user\n"
+                    + "INNER JOIN applicant\n"
+                    + "ON user.iduser=applicant.iduser\n"
+                    + "INNER JOIN apartmentlocation\n"
+                    + "ON applicant.iduser=apartmentlocation.iduser WHERE accepted = 'pending';");
+
+        } catch (SQLException ex) {
+            Logger.getLogger(Database.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        // return ClientRs;
+        //   return ClientRs;
+        return table;
+
+    }//End of setApplicationTable
+
     public ArrayList<Object> getAllApplicant() {
         ArrayList<Object> applicant = new ArrayList<>();
 
@@ -220,8 +368,8 @@ public class Database {
 
     }//end of getAllApplicant
 
-    public ArrayList<Applicants> getApplications() {
-        ArrayList<Applicants> getApplications = new ArrayList<>();
+    public ArrayList<ApplicantsController> getApplications() {
+        ArrayList<ApplicantsController> getApplications = new ArrayList<>();
 
         sql = "SELECT "
                 + "firstName,"
@@ -287,8 +435,8 @@ public class Database {
         return getApplications;
     }//End of getAlllApplication
 
-    public ArrayList<Tenants> getTenant() {
-        ArrayList<Tenants> getTenant = new ArrayList<>();
+    public ArrayList<TenantsController> getTenant() {
+        ArrayList<TenantsController> getTenant = new ArrayList<>();
 
         sql = "SELECT "
                 + "firstName,"
@@ -311,7 +459,7 @@ public class Database {
             rs = dbStatement.executeQuery(sql);
 
             while (rs.next()) {
-//                getTenant.add(new Tenants(rs.getString("idapplicant"),
+//                getTenant.add(new TenantsController(rs.getString("idapplicant"),
 //                        rs.getString("firstName"),
 //                        rs.getString("lastName"),
 //                        rs.getString("phoneNumber"),

@@ -9,6 +9,6 @@ package Rental_System;
  *
  * @author Simmigon Flagg
  */
-public class Locations {
+public class LocationsController {
     
 }

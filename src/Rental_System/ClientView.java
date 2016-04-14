@@ -17,10 +17,12 @@ public class ClientView extends javax.swing.JPanel {
      * Creates new form ViewTenant
      */
     Database client = new Database();
+    ClientsController control = new ClientsController();
 
     public ClientView() {
         initComponents();
-
+        
+        System.out.println("client.setClientTable();");
         tblClients.setModel(DbUtils.resultSetToTableModel(client.setClientTable()));
         client.closeDatabase();
     }

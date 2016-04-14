@@ -5,6 +5,8 @@
  */
 package Rental_System;
 
+import net.proteanit.sql.DbUtils;
+
 /**
  *
  * @author Simmigon Flagg
@@ -14,8 +16,16 @@ public class TenantsView extends javax.swing.JPanel {
     /**
      * Creates new form TenantsView
      */
+    Database tenants = new Database();
     public TenantsView() {
         initComponents();
+        
+        System.out.println("tenants.setTenantsTable();");
+        tblTenants.setModel(DbUtils.resultSetToTableModel(tenants.setTenantsTable()));        
+         System.out.println("tenants.closeDatabase();");
+        tenants.closeDatabase();
+        
+      
     }
 
     /**
@@ -29,14 +39,19 @@ public class TenantsView extends javax.swing.JPanel {
 
         jTabbedPane1 = new javax.swing.JTabbedPane();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        tblTenants = new javax.swing.JTable();
         jPanel1 = new javax.swing.JPanel();
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        setPreferredSize(new java.awt.Dimension(700, 300));
+
+        jTabbedPane1.setMaximumSize(new java.awt.Dimension(0, 0));
+        jTabbedPane1.setMinimumSize(new java.awt.Dimension(0, 0));
+
+        tblTenants.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -47,7 +62,7 @@ public class TenantsView extends javax.swing.JPanel {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
-        jScrollPane1.setViewportView(jTable1);
+        jScrollPane1.setViewportView(tblTenants);
 
         jTabbedPane1.addTab("Tenants", jScrollPane1);
 
@@ -98,7 +113,7 @@ public class TenantsView extends javax.swing.JPanel {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jTabbedPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 680, Short.MAX_VALUE)
+                    .addComponent(jTabbedPane1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel1)
@@ -111,7 +126,7 @@ public class TenantsView extends javax.swing.JPanel {
                 .addContainerGap()
                 .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jTabbedPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 215, Short.MAX_VALUE)
+                .addComponent(jTabbedPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 207, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
@@ -131,6 +146,6 @@ public class TenantsView extends javax.swing.JPanel {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTabbedPane jTabbedPane1;
-    private javax.swing.JTable jTable1;
+    private javax.swing.JTable tblTenants;
     // End of variables declaration//GEN-END:variables
 }

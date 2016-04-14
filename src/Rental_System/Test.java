@@ -5,10 +5,16 @@
  */
 package Rental_System;
 
+import java.util.Date;
+
 /**
  *
  * @author Simmigon Flagg
  */
-public class Locations {
-    
+public class Test {
+
+    public static void main(String[] args) {
+
+    }
+
 }

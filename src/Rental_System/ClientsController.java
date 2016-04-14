@@ -5,10 +5,19 @@
  */
 package Rental_System;
 
+
+
 /**
  *
  * @author Simmigon Flagg
  */
-public class Locations {
-    
+public class ClientsController {
+
+    static Database Client = new Database();
+  //  ClientView View = new ClientView();
+
+    public void getTable(){
+     //View.tblClients.setModel();
+    }
+
 }

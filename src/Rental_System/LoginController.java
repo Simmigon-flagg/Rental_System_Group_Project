@@ -12,7 +12,7 @@ import java.util.ArrayList;
  *
  * @author Simmigon Flagg
  */
-public class Login {
+public class LoginController {
 
     static Database logins = new Database();
     LoginView vCom = new LoginView();

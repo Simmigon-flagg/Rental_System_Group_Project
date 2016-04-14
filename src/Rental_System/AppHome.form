@@ -58,7 +58,7 @@
                   <Component id="btnMaintenance" min="-2" pref="102" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
                   <Component id="btnReports" min="-2" pref="102" max="-2" attributes="0"/>
-                  <EmptySpace max="32767" attributes="0"/>
+                  <EmptySpace min="-2" max="-2" attributes="0"/>
                   <Component id="btnLogin" linkSize="3" min="-2" pref="102" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
                   <Component id="btnLoginCancel" linkSize="3" min="-2" pref="89" max="-2" attributes="0"/>
@@ -173,8 +173,9 @@
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" alignment="0" attributes="0">
                   <EmptySpace max="-2" attributes="0"/>
-                  <Component id="lblLoginName" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace pref="898" max="32767" attributes="0"/>
+                  <Component id="lblLoginName" min="-2" pref="151" max="-2" attributes="0"/>
+                  <EmptySpace pref="570" max="32767" attributes="0"/>
+                  <Component id="labelTime" min="-2" pref="227" max="-2" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -182,7 +183,10 @@
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" alignment="0" attributes="0">
                   <EmptySpace max="-2" attributes="0"/>
-                  <Component id="lblLoginName" min="-2" max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="3" attributes="0">
+                      <Component id="lblLoginName" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="labelTime" alignment="3" min="-2" pref="14" max="-2" attributes="0"/>
+                  </Group>
                   <EmptySpace pref="23" max="32767" attributes="0"/>
               </Group>
           </Group>
@@ -193,6 +197,8 @@
           <Properties>
             <Property name="text" type="java.lang.String" value="Welcome, "/>
           </Properties>
+        </Component>
+        <Component class="javax.swing.JLabel" name="labelTime">
         </Component>
       </SubComponents>
     </Container>
