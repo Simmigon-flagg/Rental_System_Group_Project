@@ -147,7 +147,10 @@ public class Database {
         ResultSet ClientsTable = null;
         try {
             dbStatement = DatabaseConn().createStatement();
-            ClientsTable = dbStatement.executeQuery("SELECT firstName as Employee FROM user WHERE is_client = 1");
+           
+
+
+            ClientsTable = dbStatement.executeQuery("SELECT iduser as Employee, firstName as First ,lastName as Last FROM user WHERE is_client = 1");
 
         } catch (SQLException ex) {
             Logger.getLogger(Database.class.getName()).log(Level.SEVERE, null, ex);
@@ -234,6 +237,29 @@ public class Database {
 
     }//End of getAllLocationAndPrice
 
+        public ArrayList getClientTable(String client_id) {
+
+        ResultSet table = null;
+        ArrayList<String> admin = new ArrayList<>();
+        try {
+            dbStatement = DatabaseConn().createStatement();
+            table = dbStatement.executeQuery("SELECT iduser,firstName,lastName,pass FROM user WHERE iduser = '" + client_id + "';");
+
+            while (table.next()) {
+                admin.add(table.getString("iduser"));
+                admin.add(table.getString("firstName"));
+                admin.add(table.getString("lastName"));
+                admin.add(table.getString("pass"));
+
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(Database.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        System.out.println("admin: " + admin);
+
+        return admin;
+
+    }//End of getAdminTable
     public ArrayList getAdminTable(String admin_Id) {
 
         ResultSet table = null;

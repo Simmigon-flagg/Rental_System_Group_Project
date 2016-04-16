@@ -280,7 +280,9 @@ public class AppHome extends javax.swing.JFrame {
     }//GEN-LAST:event_btnLoginCancelActionPerformed
 
     private void btnTenantsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTenantsActionPerformed
-        // TODO add your handling code here:
+        
+        
+        //Show Tenants Card
         showCardView.show(cardPanels, "Tenants");
     }//GEN-LAST:event_btnTenantsActionPerformed
 

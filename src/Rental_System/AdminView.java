@@ -52,10 +52,8 @@ public class AdminView extends javax.swing.JPanel {
         jPanel4 = new javax.swing.JPanel();
         jLabel6 = new javax.swing.JLabel();
         txtNewFirst = new javax.swing.JTextField();
-        jLabel8 = new javax.swing.JLabel();
         jButton5 = new javax.swing.JButton();
         btnSave = new javax.swing.JButton();
-        txtNewEmail = new javax.swing.JTextField();
         txtNewLast = new javax.swing.JTextField();
         jLabel7 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
@@ -64,15 +62,15 @@ public class AdminView extends javax.swing.JPanel {
         txtAdminDOB = new javax.swing.JTextField();
         cardAdmin = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
-        txtName = new javax.swing.JTextField();
+        txtNameAdmin = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
-        txtPassword = new javax.swing.JTextField();
+        txtPasswordAdmin = new javax.swing.JTextField();
         jButton2 = new javax.swing.JButton();
         jButton1 = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
-        txtLastName = new javax.swing.JTextField();
-        txtEmployeeIDNumber = new javax.swing.JTextField();
+        txtLastNameAdmin = new javax.swing.JTextField();
+        txtEmployeeIDNumberAdmin = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
 
         btnBack.setText("Back");
@@ -99,7 +97,7 @@ public class AdminView extends javax.swing.JPanel {
                 .addContainerGap())
         );
 
-        jLabel1.setText("jLabel1");
+        jLabel1.setText("Admin Set Up");
 
         panCardAdmin.setLayout(new java.awt.CardLayout());
 
@@ -136,9 +134,12 @@ public class AdminView extends javax.swing.JPanel {
 
         jLabel6.setText("First Name:");
 
-        jLabel8.setText("Work Email:");
-
         jButton5.setText("Clear");
+        jButton5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton5ActionPerformed(evt);
+            }
+        });
 
         btnSave.setText("Save");
         btnSave.addActionListener(new java.awt.event.ActionListener() {
@@ -161,24 +162,10 @@ public class AdminView extends javax.swing.JPanel {
                 .addContainerGap()
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel4Layout.createSequentialGroup()
-                        .addComponent(jLabel9)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(txtNewSSN, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel4Layout.createSequentialGroup()
-                        .addComponent(jLabel10)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(txtAdminDOB, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel4Layout.createSequentialGroup()
-                        .addComponent(jLabel8)
-                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel4Layout.createSequentialGroup()
-                                .addGap(20, 20, 20)
-                                .addComponent(btnSave)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(jPanel4Layout.createSequentialGroup()
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(txtNewEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addGap(76, 76, 76)
+                        .addComponent(btnSave)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel4Layout.createSequentialGroup()
                         .addComponent(jLabel6)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -186,13 +173,21 @@ public class AdminView extends javax.swing.JPanel {
                     .addGroup(jPanel4Layout.createSequentialGroup()
                         .addComponent(jLabel7)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(txtNewLast, javax.swing.GroupLayout.PREFERRED_SIZE, 162, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(txtNewLast, javax.swing.GroupLayout.PREFERRED_SIZE, 162, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel4Layout.createSequentialGroup()
+                        .addComponent(jLabel10)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(txtAdminDOB, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel4Layout.createSequentialGroup()
+                        .addComponent(jLabel9)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(txtNewSSN, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        jPanel4Layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {txtNewEmail, txtNewFirst, txtNewLast, txtNewSSN});
+        jPanel4Layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {txtNewFirst, txtNewLast, txtNewSSN});
 
-        jPanel4Layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {jLabel10, jLabel6, jLabel7, jLabel8, jLabel9});
+        jPanel4Layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {jLabel10, jLabel6, jLabel7, jLabel9});
 
         jPanel4Layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {btnSave, jButton5});
 
@@ -208,18 +203,14 @@ public class AdminView extends javax.swing.JPanel {
                     .addComponent(jLabel7)
                     .addComponent(txtNewLast, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel8)
-                    .addComponent(txtNewEmail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(4, 4, 4)
-                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel10)
                     .addComponent(txtAdminDOB, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtNewSSN, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel9))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 30, Short.MAX_VALUE)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnSave)
                     .addComponent(jButton5))
@@ -243,17 +234,17 @@ public class AdminView extends javax.swing.JPanel {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        tabPCard.addTab("tab2", jPanel3);
+        tabPCard.addTab("Add Admin", jPanel3);
 
         panCardAdmin.add(tabPCard, "card2");
 
         jPanel2.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
-        txtName.setEditable(false);
-        txtName.setEnabled(false);
-        txtName.addActionListener(new java.awt.event.ActionListener() {
+        txtNameAdmin.setEditable(false);
+        txtNameAdmin.setEnabled(false);
+        txtNameAdmin.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtNameActionPerformed(evt);
+                txtNameAdminActionPerformed(evt);
             }
         });
 
@@ -272,12 +263,12 @@ public class AdminView extends javax.swing.JPanel {
 
         jLabel3.setText("Last Name:");
 
-        txtLastName.setEnabled(false);
+        txtLastNameAdmin.setEnabled(false);
 
-        txtEmployeeIDNumber.setEnabled(false);
-        txtEmployeeIDNumber.addActionListener(new java.awt.event.ActionListener() {
+        txtEmployeeIDNumberAdmin.setEnabled(false);
+        txtEmployeeIDNumberAdmin.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtEmployeeIDNumberActionPerformed(evt);
+                txtEmployeeIDNumberAdminActionPerformed(evt);
             }
         });
 
@@ -293,14 +284,14 @@ public class AdminView extends javax.swing.JPanel {
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                         .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(txtEmployeeIDNumber))
+                        .addComponent(txtEmployeeIDNumberAdmin))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                 .addGroup(jPanel2Layout.createSequentialGroup()
                                     .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                    .addComponent(txtName))
+                                    .addComponent(txtNameAdmin))
                                 .addGroup(jPanel2Layout.createSequentialGroup()
                                     .addGap(86, 86, 86)
                                     .addComponent(jButton1)
@@ -309,38 +300,38 @@ public class AdminView extends javax.swing.JPanel {
                             .addGroup(jPanel2Layout.createSequentialGroup()
                                 .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(txtLastName, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(txtLastNameAdmin, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(jPanel2Layout.createSequentialGroup()
                                 .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(txtPassword, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addComponent(txtPasswordAdmin, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
 
         jPanel2Layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {jButton1, jButton2});
 
-        jPanel2Layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {txtLastName, txtPassword});
+        jPanel2Layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {txtLastNameAdmin, txtPasswordAdmin});
 
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtEmployeeIDNumber, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtEmployeeIDNumberAdmin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel5))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtNameAdmin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel2))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
-                    .addComponent(txtLastName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtLastNameAdmin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel4)
-                    .addComponent(txtPassword, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtPasswordAdmin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton1)
@@ -387,7 +378,7 @@ public class AdminView extends javax.swing.JPanel {
                 .addContainerGap()
                 .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(panCardAdmin, javax.swing.GroupLayout.DEFAULT_SIZE, 215, Short.MAX_VALUE)
+                .addComponent(panCardAdmin, javax.swing.GroupLayout.PREFERRED_SIZE, 215, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
@@ -398,19 +389,20 @@ public class AdminView extends javax.swing.JPanel {
 
         System.out.println("getSingleAdmin();");
         int row = tblAdmins.getSelectedRow();
-        int col = tblAdmins.getSelectedColumn();
+       
         String idAdmin = (tblAdmins.getModel().getValueAt(row, 0).toString());
 
         System.out.println("Number " + idAdmin);
         ArrayList<String> ArrayLis = admins.getAdminTable(idAdmin);
-        txtEmployeeIDNumber.setText(ArrayLis.get(0));
+        txtEmployeeIDNumberAdmin.setText(ArrayLis.get(0));
 
-        txtName.setText(ArrayLis.get(1));
-        txtLastName.setText(ArrayLis.get(2));
-        txtPassword.setText(ArrayLis.get(3));
+        txtNameAdmin.setText(ArrayLis.get(1));
+        txtLastNameAdmin.setText(ArrayLis.get(2));
+        txtPasswordAdmin.setText(ArrayLis.get(3));
         System.out.println("admins.closeDatabase();");
         admins.closeDatabase();
         // this will be good for paid.
+
         panCardAdmin.removeAll();
         panCardAdmin.repaint();
         panCardAdmin.revalidate();
@@ -439,26 +431,19 @@ public class AdminView extends javax.swing.JPanel {
         btnBack.setVisible(false);
     }//GEN-LAST:event_btnBackActionPerformed
 
-    private void txtNameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNameActionPerformed
+    private void txtNameAdminActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNameAdminActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_txtNameActionPerformed
+    }//GEN-LAST:event_txtNameAdminActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-   //     int row = tblAdmins.getSelectedRow();
-        //     int col = tblAdmins.getSelectedColumn();
-        //    String idAdmin = (tblAdmins.getModel().getValueAt(row, 0).toString());
-
-        //   txtEmployeeIDNumber.getText();
-        //  txtName.getText();
-        //  txtLastName.getText();
-        //  txtPassword.getText();
-        admins.updateAdminTable(txtEmployeeIDNumber.getText(), txtName.getText(), txtLastName.getText(), txtPassword.getText());
+   
+        admins.updateAdminTable(txtEmployeeIDNumberAdmin.getText(), txtNameAdmin.getText(), txtLastNameAdmin.getText(), txtPasswordAdmin.getText());
         admins.closeDatabase();
     }//GEN-LAST:event_jButton1ActionPerformed
 
-    private void txtEmployeeIDNumberActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtEmployeeIDNumberActionPerformed
+    private void txtEmployeeIDNumberAdminActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtEmployeeIDNumberAdminActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_txtEmployeeIDNumberActionPerformed
+    }//GEN-LAST:event_txtEmployeeIDNumberAdminActionPerformed
 
     private void btnSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSaveActionPerformed
 
@@ -472,16 +457,20 @@ public class AdminView extends javax.swing.JPanel {
 
     }//GEN-LAST:event_btnSaveActionPerformed
 
+    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
+        ClearTextBoxes();
+    }//GEN-LAST:event_jButton5ActionPerformed
+
     public void ClearTextBoxes() {
         txtAdminDOB.setText("");
-        txtEmployeeIDNumber.setText("");
+        txtEmployeeIDNumberAdmin.setText("");
         txtNewFirst.setText("");
-        txtLastName.setText("");
-        txtName.setText("");
-        txtNewEmail.setText("");
+        txtLastNameAdmin.setText("");
+        txtNameAdmin.setText("");
+      //  txtNewEmail.setText("");
         txtNewLast.setText("");
         txtNewSSN.setText("");
-        txtPassword.setText("");
+        txtPasswordAdmin.setText("");
 
     }
 
@@ -523,7 +512,6 @@ public class AdminView extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
-    private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
@@ -534,13 +522,12 @@ public class AdminView extends javax.swing.JPanel {
     protected javax.swing.JTabbedPane tabPCard;
     public javax.swing.JTable tblAdmins;
     protected javax.swing.JTextField txtAdminDOB;
-    protected javax.swing.JTextField txtEmployeeIDNumber;
-    protected javax.swing.JTextField txtLastName;
-    protected javax.swing.JTextField txtName;
-    protected javax.swing.JTextField txtNewEmail;
+    protected javax.swing.JTextField txtEmployeeIDNumberAdmin;
+    protected javax.swing.JTextField txtLastNameAdmin;
+    protected javax.swing.JTextField txtNameAdmin;
     protected javax.swing.JTextField txtNewFirst;
     protected javax.swing.JTextField txtNewLast;
     protected javax.swing.JTextField txtNewSSN;
-    protected javax.swing.JTextField txtPassword;
+    protected javax.swing.JTextField txtPasswordAdmin;
     // End of variables declaration//GEN-END:variables
 }
