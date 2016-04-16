@@ -166,10 +166,12 @@ public class Database {
         ResultSet table = null;
         try {
             dbStatement = DatabaseConn().createStatement();
-            table = dbStatement.executeQuery("SELECT firstName,lastName,phoneNumber, price ,location, aptNumber,numberOfBedrooms,numberOfBathRoom FROM user INNER JOIN applicant\n"
-                    + "                   ON user.iduser=applicant.iduser\n"
-                    + "				   INNER JOIN apartmentlocation\n"
-                    + "                   ON applicant.iduser=apartmentlocation.iduser WHERE accepted = 1;");
+            table = dbStatement.executeQuery("SELECT firstName as FIRST,lastName as LAST,phoneNumber as PHONE,location AS BUILDING,aptNumber as APT ,numberOfBedrooms as BEDS,numberOfBathRoom as BATH ,price as RENT \n" +
+"FROM user\n" +
+"INNER JOIN applicant\n" +
+"ON user.iduser=applicant.iduser\n" +
+"INNER JOIN apartmentlocation\n" +
+"ON applicant.iduser=apartmentlocation.iduser where accepted = 1;");
 
         } catch (SQLException ex) {
             Logger.getLogger(Database.class.getName()).log(Level.SEVERE, null, ex);
@@ -308,7 +310,7 @@ public class Database {
         try {
             dbStatement = DatabaseConn().createStatement();
 
-            table = dbStatement.executeQuery("SELECT iduser ,firstName,lastName,pass FROM apartrmentrentaldb.user WHERE is_admin = 1;");
+            table = dbStatement.executeQuery("SELECT iduser as AdminID ,firstName,lastName,pass FROM apartrmentrentaldb.user WHERE is_admin = 1;");
         } catch (SQLException ex) {
             Logger.getLogger(Database.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -323,31 +325,10 @@ public class Database {
         ResultSet table = null;
         try {
             dbStatement = DatabaseConn().createStatement();
-            table = dbStatement.executeQuery("SELECT "
-                    + "firstName,"
-                    + "lastName,"
-                    // "userName,"
-                    // "dateOfBirth,"
-                    //               + "pass,"
-                    + "accepted,"
-                    + "socialSecurity,"
-                    //                + "streetAddress,"
-                    //                + "City,"
-                    //                + "Zip,"
-                    + "phoneNumber,"
-                    // "employedBy,"
-                    // "JobTitle,\n"
-                    // "monthlyGrossPay,"
-                    + "criminalBackgroundCheck "
-                    //                + "location,"
-                    //                + "aptNumber,"
-                    //                + "numberOfBedrooms,"
-                    //                + "price\n"
-                    + "FROM user\n"
-                    + "INNER JOIN applicant\n"
-                    + "ON user.iduser=applicant.iduser\n"
-                    + "INNER JOIN apartmentlocation\n"
-                    + "ON applicant.iduser=apartmentlocation.iduser WHERE accepted = 'pending';");
+            table = dbStatement.executeQuery("SELECT firstName as First, lastName as Last, phoneNumber as Phone , criminalBackgroundCheck as Background, accepted \n" +
+"FROM `apartrmentrentaldb`.`user` \n" +
+"JOIN applicant\n" +
+"ON user.iduser=applicant.iduser Where accepted = 0;");
 
         } catch (SQLException ex) {
             Logger.getLogger(Database.class.getName()).log(Level.SEVERE, null, ex);
