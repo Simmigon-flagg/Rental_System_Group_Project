@@ -617,7 +617,7 @@ public class Database {
         ResultSet table = null;
         try {
             dbStatement = DatabaseConn().createStatement();
-            table = dbStatement.executeQuery("SELECT firstName as First, lastName as Last, phoneNumber as Phone , criminalBackgroundCheck as Background, accepted \n"
+            table = dbStatement.executeQuery("SELECT idapplicant as Application ,firstName as First, lastName as Last, phoneNumber as Phone , criminalBackgroundCheck as Background, accepted \n"
                     + "FROM `apartrmentrentaldb`.`user` \n"
                     + "JOIN applicant\n"
                     + "ON user.iduser=applicant.iduser Where accepted = 0;");
@@ -673,5 +673,35 @@ public class Database {
         }
 
     }//End of setNewApplication
+    public ArrayList getApplication(String idApplcation) {
 
+        ResultSet table = null;
+        ArrayList<String> Application = new ArrayList<>();
+        try {
+            dbStatement = DatabaseConn().createStatement();
+                table = dbStatement.executeQuery("SELECT idapplicant as Application ,firstName as First, lastName as Last, phoneNumber as Phone ,userName as Email, criminalBackgroundCheck as Background, accepted\n" +
+"                    FROM `apartrmentrentaldb`.`user`\n" +
+"                     JOIN applicant\n" +
+"                    ON user.iduser=applicant.iduser WHERE idapplicant = '"+idApplcation+"';");
+
+            while (table.next()) {
+                Application.add(table.getString("Application"));
+                Application.add(table.getString("First"));
+                Application.add(table.getString("Last"));
+                Application.add(table.getString("Phone"));
+                Application.add(table.getString("Email"));
+                Application.add(table.getString("Background"));
+                Application.add(table.getString("accepted"));
+               
+             
+
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(Database.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        System.out.println("admin: " + Application);
+
+        return Application;
+
+    }//End of getApplicationTable
 }
