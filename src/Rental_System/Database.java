@@ -297,26 +297,7 @@ public class Database {
         //   return ClientRs;
         return table;
 
-    }//End of setApplicationTable
-
-    public ResultSet setApplicationTable() {
-
-        ResultSet table = null;
-        try {
-            dbStatement = DatabaseConn().createStatement();
-            table = dbStatement.executeQuery("SELECT firstName as First, lastName as Last, phoneNumber as Phone , criminalBackgroundCheck as Background, accepted \n"
-                    + "FROM `apartrmentrentaldb`.`user` \n"
-                    + "JOIN applicant\n"
-                    + "ON user.iduser=applicant.iduser Where accepted = 0;");
-
-        } catch (SQLException ex) {
-            Logger.getLogger(Database.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        // return ClientRs;
-        //   return ClientRs;
-        return table;
-
-    }//End of setApplicationTable
+    }//End of setAdminTable
 
     public ArrayList<Object> getAllApplicant() {
         ArrayList<Object> applicant = new ArrayList<>();
@@ -591,9 +572,9 @@ public class Database {
         ArrayList<String> admin = new ArrayList<>();
         Date date = new Date();
         String[] time = date.toString().split(" ");
-        
+
         int idApartment = 0;
-        String  currentMonth =time[1];
+        String currentMonth = time[1];
         System.out.println("currentMonth.toLowerCase()" + currentMonth.toLowerCase());
         try {
             dbStatement = DatabaseConn().createStatement();
@@ -607,11 +588,9 @@ public class Database {
             }
 
             sql = "UPDATE apartmentlocation\n"
-                    + "                    SET "+currentMonth.toLowerCase()+"  = '" + amount + "'\n"
+                    + "                    SET " + currentMonth.toLowerCase() + "  = '" + amount + "'\n"
                     + "                   WHERE idapartmentlocation=\n"
                     + "                  '" + idApartment + "';";
-
-          
 
             dbStatement.executeUpdate(sql);
             JOptionPane.showMessageDialog(null, "Rent Paid Amount: " + amount);
@@ -625,5 +604,74 @@ public class Database {
     //Update
     //Create
     //Delele
+
+//    INSERT INTO `apartrmentrentaldb`.`user`
+//(
+//`firstName`,
+//`lastName`,
+//`dateOfBirth`)
+//VALUES ( 'sdf','sdd','sdsd');
+//SELECT * FROM apartrmentrentaldb.user;
+    public ResultSet setApplicationTable() {
+
+        ResultSet table = null;
+        try {
+            dbStatement = DatabaseConn().createStatement();
+            table = dbStatement.executeQuery("SELECT firstName as First, lastName as Last, phoneNumber as Phone , criminalBackgroundCheck as Background, accepted \n"
+                    + "FROM `apartrmentrentaldb`.`user` \n"
+                    + "JOIN applicant\n"
+                    + "ON user.iduser=applicant.iduser Where accepted = 0;");
+
+        } catch (SQLException ex) {
+            Logger.getLogger(Database.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        // return ClientRs;
+        //   return ClientRs;
+        return table;
+
+    }//End of setApplicationTable
+
+    public void addNewApplication(String first, String last,String emailIsUserName, String DOB, String socialSecurity, String streetAddress, String city, String state, String zip, String phone, String employeeName, String job, String check) {
+
+        try {
+            dbStatement = DatabaseConn().createStatement();
+            sql = "INSERT INTO `apartrmentrentaldb`.`user`\n"
+                    + "(\n"
+                    + "`firstName`,\n"
+                    + "`lastName`,\n"
+                     + "`userName`,\n"
+                    + "`dateOfBirth`)\n"
+                    + "VALUES ( '" + first + "','" + last + "','" + emailIsUserName + "','" + DOB + "');\n";
+            dbStatement.executeUpdate(sql);
+            int lastInsertedId = 0;
+            ResultSet getKeyRs = dbStatement.executeQuery("SELECT LAST_INSERT_ID()");
+            if (getKeyRs != null) {
+                if (getKeyRs.next()) {
+                    lastInsertedId = getKeyRs.getInt(1);
+                }
+                getKeyRs.close();
+            }
+
+            sql = "INSERT INTO `apartrmentrentaldb`.`applicant`\n"
+                    + "(\n"
+                    + "`iduser`,\n"
+                    + "`socialSecurity`,\n"
+                    + "`streetAddress`,\n"
+                    + "`City`,\n"
+                    + "`state`,\n"
+                    + "`Zip`,\n"
+                    + "`phoneNumber`,\n"
+                    + "`employedBy`,\n"
+                    + "`JobTitle`,\n"
+                    + "`monthlyGrossPay`,criminalBackgroundCheck)\n"
+                    + "VALUES\n"
+                    + "(" + lastInsertedId + ",'" + socialSecurity + "','" + streetAddress + "','" + city + "','" + state + "','" + zip + "','" + phone + "','" + employeeName + "','" + job + "','" + check + "',0);";
+            dbStatement.executeUpdate(sql);
+  JOptionPane.showMessageDialog(null, "Added New: Applicant");
+        } catch (SQLException ex) {
+            Logger.getLogger(Database.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+    }//End of setNewApplication
 
 }

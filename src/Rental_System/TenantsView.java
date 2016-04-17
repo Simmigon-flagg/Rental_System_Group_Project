@@ -288,7 +288,7 @@ public class TenantsView extends javax.swing.JPanel {
 
     private void btnBackToTenantTableActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackToTenantTableActionPerformed
         tblTenants.setModel(DbUtils.resultSetToTableModel(tenants.setTenantsTable()));
-        //   System.out.println("tenants.closeDatabase();");
+       
         tenants.closeDatabase();
         btnBackToTenantTable.setVisible(false);
         jPanel2.removeAll();
