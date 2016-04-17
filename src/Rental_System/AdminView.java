@@ -25,9 +25,9 @@ public class AdminView extends javax.swing.JPanel {
     public AdminView() {
         initComponents();
         btnBack.setVisible(false);
-        System.out.println("admins.setTenantsTable();");
+    //    System.out.println("admins.setTenantsTable();");
         tblAdmins.setModel(DbUtils.resultSetToTableModel(admins.setAdminTable()));
-        System.out.println("admins.closeDatabase();");
+     //   System.out.println("admins.closeDatabase();");
         admins.closeDatabase();
 
     }
@@ -387,19 +387,19 @@ public class AdminView extends javax.swing.JPanel {
 
     private void tblAdminsMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblAdminsMouseClicked
 
-        System.out.println("getSingleAdmin();");
+    //    System.out.println("getSingleAdmin();");
         int row = tblAdmins.getSelectedRow();
        
         String idAdmin = (tblAdmins.getModel().getValueAt(row, 0).toString());
 
-        System.out.println("Number " + idAdmin);
+      //  System.out.println("Number " + idAdmin);
         ArrayList<String> ArrayLis = admins.getAdminTable(idAdmin);
         txtEmployeeIDNumberAdmin.setText(ArrayLis.get(0));
 
         txtNameAdmin.setText(ArrayLis.get(1));
         txtLastNameAdmin.setText(ArrayLis.get(2));
         txtPasswordAdmin.setText(ArrayLis.get(3));
-        System.out.println("admins.closeDatabase();");
+   //     System.out.println("admins.closeDatabase();");
         admins.closeDatabase();
         // this will be good for paid.
 
@@ -416,9 +416,9 @@ public class AdminView extends javax.swing.JPanel {
     }//GEN-LAST:event_tblAdminsMouseClicked
 
     private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackActionPerformed
-        System.out.println("admins.setTenantsTable();");
+      //  System.out.println("admins.setTenantsTable();");
         tblAdmins.setModel(DbUtils.resultSetToTableModel(admins.setAdminTable()));
-        System.out.println("admins.closeDatabase();");
+     //   System.out.println("admins.closeDatabase();");
         admins.closeDatabase();
 
         panCardAdmin.removeAll();
@@ -452,7 +452,7 @@ public class AdminView extends javax.swing.JPanel {
         tblAdmins.setModel(DbUtils.resultSetToTableModel(admins.setAdminTable()));
         admins.closeDatabase();
         ClearTextBoxes();
-        System.out.println("admins.closeDatabase(); Save");
+       // System.out.println("admins.closeDatabase(); Save");
 
 
     }//GEN-LAST:event_btnSaveActionPerformed
@@ -493,7 +493,7 @@ public class AdminView extends javax.swing.JPanel {
             }
             count++;
         }
-        System.out.println("makePassword");
+     //   System.out.println("makePassword");
         return makePassword;
     }
 

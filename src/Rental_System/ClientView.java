@@ -23,7 +23,7 @@ public class ClientView extends javax.swing.JPanel {
     public ClientView() {
         initComponents();
         btnClientBack.setVisible(false);
-        System.out.println("client.setClientTable();");
+      //  System.out.println("client.setClientTable();");
         tblClients.setModel(DbUtils.resultSetToTableModel(client.setClientTable()));
 
         client.closeDatabase();
@@ -338,17 +338,17 @@ public class ClientView extends javax.swing.JPanel {
 
         String idClient = (tblClients.getModel().getValueAt(row, 0).toString());
 
-        System.out.println("Number " + idClient);
+       // System.out.println("Number " + idClient);
         ArrayList<String> arrayList = client.getClientTable(idClient);
 
-        System.out.println("Number " + idClient);
+     //   System.out.println("Number " + idClient);
 
         txtEmployeeIDNumber.setText(arrayList.get(0));
 
         txtName.setText(arrayList.get(1));
         txtLastName.setText(arrayList.get(2));
         txtPassword.setText(arrayList.get(3));
-        System.out.println("admins.closeDatabase();");
+      //  System.out.println("admins.closeDatabase();");
         client.closeDatabase();
 
         employeeCardPanel.removeAll();

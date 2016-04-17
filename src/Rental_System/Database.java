@@ -14,6 +14,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 
 public class Database {
 
@@ -120,7 +121,7 @@ public class Database {
         sql = "INSERT INTO user \n"
                 + "                (firstName,lastName,userName,dateOfBirth,pass,is_admin,is_client) \n"
                 + "                VALUES \n"
-                + "                ( '"+firstName+"',\n"
+                + "                ( '" + firstName + "',\n"
                 + "               '" + lastName + " ',\n"
                 + "               ' " + firstName + "',\n"
                 + "              '" + dateOfBirth + "',\n"
@@ -147,8 +148,6 @@ public class Database {
         ResultSet ClientsTable = null;
         try {
             dbStatement = DatabaseConn().createStatement();
-           
-
 
             ClientsTable = dbStatement.executeQuery("SELECT iduser as Employee, firstName as First ,lastName as Last FROM user WHERE is_client = 1");
 
@@ -160,27 +159,6 @@ public class Database {
         return ClientsTable;
 
     }//End of setClientTable
-
-    public ResultSet setTenantsTable() {
-
-        ResultSet table = null;
-        try {
-            dbStatement = DatabaseConn().createStatement();
-            table = dbStatement.executeQuery("SELECT firstName as FIRST,lastName as LAST,phoneNumber as PHONE,location AS BUILDING,aptNumber as APT ,numberOfBedrooms as BEDS,numberOfBathRoom as BATH ,price as RENT \n" +
-"FROM user\n" +
-"INNER JOIN applicant\n" +
-"ON user.iduser=applicant.iduser\n" +
-"INNER JOIN apartmentlocation\n" +
-"ON applicant.iduser=apartmentlocation.iduser where accepted = 1;");
-
-        } catch (SQLException ex) {
-            Logger.getLogger(Database.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        // return ClientRs;
-        //   return ClientRs;
-        return table;
-
-    }//End of setTenant
 
     public ArrayList<Object> getClient() {
         sql = "SELECT * FROM user;";
@@ -239,7 +217,7 @@ public class Database {
 
     }//End of getAllLocationAndPrice
 
-        public ArrayList getClientTable(String client_id) {
+    public ArrayList getClientTable(String client_id) {
 
         ResultSet table = null;
         ArrayList<String> admin = new ArrayList<>();
@@ -262,6 +240,7 @@ public class Database {
         return admin;
 
     }//End of getAdminTable
+
     public ArrayList getAdminTable(String admin_Id) {
 
         ResultSet table = null;
@@ -325,10 +304,10 @@ public class Database {
         ResultSet table = null;
         try {
             dbStatement = DatabaseConn().createStatement();
-            table = dbStatement.executeQuery("SELECT firstName as First, lastName as Last, phoneNumber as Phone , criminalBackgroundCheck as Background, accepted \n" +
-"FROM `apartrmentrentaldb`.`user` \n" +
-"JOIN applicant\n" +
-"ON user.iduser=applicant.iduser Where accepted = 0;");
+            table = dbStatement.executeQuery("SELECT firstName as First, lastName as Last, phoneNumber as Phone , criminalBackgroundCheck as Background, accepted \n"
+                    + "FROM `apartrmentrentaldb`.`user` \n"
+                    + "JOIN applicant\n"
+                    + "ON user.iduser=applicant.iduser Where accepted = 0;");
 
         } catch (SQLException ex) {
             Logger.getLogger(Database.class.getName()).log(Level.SEVERE, null, ex);
@@ -375,117 +354,116 @@ public class Database {
 
     }//end of getAllApplicant
 
-    public ArrayList<ApplicantsController> getApplications() {
-        ArrayList<ApplicantsController> getApplications = new ArrayList<>();
-
-        sql = "SELECT "
-                + "firstName,"
-                + "lastName,"
-                + "userName,"
-                + "dateOfBirth,"
-                + "pass,"
-                + "accepted,"
-                + "socialSecurity,"
-                + "streetAddress,"
-                + "City,"
-                + "Zip,"
-                + "phoneNumber,"
-                + "employedBy,"
-                + "JobTitle,\n"
-                + "monthlyGrossPay,"
-                + "criminalBackgroundCheck,"
-                + "location,"
-                + "aptNumber,"
-                + "numberOfBedrooms,"
-                + "price\n"
-                + "FROM user\n"
-                + "INNER JOIN applicant\n"
-                + "ON user.iduser=applicant.iduser\n"
-                + "INNER JOIN apartmentlocation\n"
-                + "ON applicant.iduser=apartmentlocation.iduser;";
-
-        try {
-
-            dbStatement = DatabaseConn().createStatement();
-
-            rs = dbStatement.executeQuery(sql);
-
-            while (rs.next()) {
-                getApplications.add(null);
-//                getApplications.add(rs.getString("firstName"));
-//                getApplications.add(rs.getString("lastName"));
-//                getApplications.add(rs.getString("userName"));
-//                getApplications.add(rs.getString("dateOfBirth"));
-//                getApplications.add(rs.getString("pass"));
-//                getAllApplication.add(rs.getString("accepted"));
-//                getAllApplication.add(rs.getString("socialSecurity"));
-//                getAllApplication.add(rs.getString("streetAddress"));
-//                getAllApplication.add(rs.getString("City"));
-//                getAllApplication.add(rs.getString("Zip"));
-//                getAllApplication.add(rs.getString("phoneNumber"));
-//                getAllApplication.add(rs.getString("employedBy"));
-//                getAllApplication.add(rs.getString("JobTitle"));
-//                getAllApplication.add(rs.getString("monthlyGrossPay"));
-//                getAllApplication.add(rs.getString("location"));
-//                getAllApplication.add(rs.getString("aptNumber"));
-//                getAllApplication.add(rs.getString("price"));
-
-            }
-
-            conn.close();
-
-        } catch (Exception e) {
-
-            System.out.println("getAlllApplication: " + e);
-        }
-
-        return getApplications;
-    }//End of getAlllApplication
-
-    public ArrayList<TenantsController> getTenant() {
-        ArrayList<TenantsController> getTenant = new ArrayList<>();
-
-        sql = "SELECT "
-                + "firstName,"
-                + "lastName,"
-                + "phoneNumber,"
-                + "location,"
-                + "aptNumber,"
-                + "numberOfBedrooms,"
-                + "price\n"
-                + "FROM user\n"
-                + "INNER JOIN applicant\n"
-                + "ON user.iduser=applicant.iduser\n"
-                + "INNER JOIN apartmentlocation\n"
-                + "ON applicant.iduser=apartmentlocation.iduser;";
-
-        try {
-
-            dbStatement = DatabaseConn().createStatement();
-
-            rs = dbStatement.executeQuery(sql);
-
-            while (rs.next()) {
-//                getTenant.add(new TenantsController(rs.getString("idapplicant"),
-//                        rs.getString("firstName"),
-//                        rs.getString("lastName"),
-//                        rs.getString("phoneNumber"),
-//                        rs.getString("location"),
-//                        rs.getString("aptNumber"),
-//                        rs.getString("numberOfBedrooms"),
-//                        rs.getString("price")));
-            }
-
-            conn.close();
-
-        } catch (Exception e) {
-
-            System.out.println("getTenant: " + e);
-        }
-
-        return getTenant;
-    }//End of getAlllApplication
-
+//    public ArrayList<ApplicantsController> getApplications() {
+//        ArrayList<ApplicantsController> getApplications = new ArrayList<>();
+//
+//        sql = "SELECT "
+//                + "firstName,"
+//                + "lastName,"
+//                + "userName,"
+//                + "dateOfBirth,"
+//                + "pass,"
+//                + "accepted,"
+//                + "socialSecurity,"
+//                + "streetAddress,"
+//                + "City,"
+//                + "Zip,"
+//                + "phoneNumber,"
+//                + "employedBy,"
+//                + "JobTitle,\n"
+//                + "monthlyGrossPay,"
+//                + "criminalBackgroundCheck,"
+//                + "location,"
+//                + "aptNumber,"
+//                + "numberOfBedrooms,"
+//                + "price\n"
+//                + "FROM user\n"
+//                + "INNER JOIN applicant\n"
+//                + "ON user.iduser=applicant.iduser\n"
+//                + "INNER JOIN apartmentlocation\n"
+//                + "ON applicant.iduser=apartmentlocation.iduser;";
+//
+//        try {
+//
+//            dbStatement = DatabaseConn().createStatement();
+//
+//            rs = dbStatement.executeQuery(sql);
+//
+//            while (rs.next()) {
+//                getApplications.add(null);
+////                getApplications.add(rs.getString("firstName"));
+////                getApplications.add(rs.getString("lastName"));
+////                getApplications.add(rs.getString("userName"));
+////                getApplications.add(rs.getString("dateOfBirth"));
+////                getApplications.add(rs.getString("pass"));
+////                getAllApplication.add(rs.getString("accepted"));
+////                getAllApplication.add(rs.getString("socialSecurity"));
+////                getAllApplication.add(rs.getString("streetAddress"));
+////                getAllApplication.add(rs.getString("City"));
+////                getAllApplication.add(rs.getString("Zip"));
+////                getAllApplication.add(rs.getString("phoneNumber"));
+////                getAllApplication.add(rs.getString("employedBy"));
+////                getAllApplication.add(rs.getString("JobTitle"));
+////                getAllApplication.add(rs.getString("monthlyGrossPay"));
+////                getAllApplication.add(rs.getString("location"));
+////                getAllApplication.add(rs.getString("aptNumber"));
+////                getAllApplication.add(rs.getString("price"));
+//
+//            }
+//
+//            conn.close();
+//
+//        } catch (Exception e) {
+//
+//            System.out.println("getAlllApplication: " + e);
+//        }
+//
+//        return getApplications;
+//    }//End of getAlllApplication
+//
+//    public ArrayList<TenantsController> getTenant() {
+//        ArrayList<TenantsController> getTenant = new ArrayList<>();
+//
+//        sql = "SELECT "
+//                + "firstName,"
+//                + "lastName,"
+//                + "phoneNumber,"
+//                + "location,"
+//                + "aptNumber,"
+//                + "numberOfBedrooms,"
+//                + "price\n"
+//                + "FROM user\n"
+//                + "INNER JOIN applicant\n"
+//                + "ON user.iduser=applicant.iduser\n"
+//                + "INNER JOIN apartmentlocation\n"
+//                + "ON applicant.iduser=apartmentlocation.iduser;";
+//
+//        try {
+//
+//            dbStatement = DatabaseConn().createStatement();
+//
+//            rs = dbStatement.executeQuery(sql);
+//
+//            while (rs.next()) {
+////                getTenant.add(new TenantsController(rs.getString("idapplicant"),
+////                        rs.getString("firstName"),
+////                        rs.getString("lastName"),
+////                        rs.getString("phoneNumber"),
+////                        rs.getString("location"),
+////                        rs.getString("aptNumber"),
+////                        rs.getString("numberOfBedrooms"),
+////                        rs.getString("price")));
+//            }
+//
+//            conn.close();
+//
+//        } catch (Exception e) {
+//
+//            System.out.println("getTenant: " + e);
+//        }
+//
+//        return getTenant;
+//    }//End of getAlllApplication
     public Object[] isLogin(String email, String password) {
         boolean isLogin = false;
 
@@ -566,7 +544,86 @@ public class Database {
         }
     }
 
+    public ResultSet setTenantsTable() {
+
+        ResultSet table = null;
+        try {
+            dbStatement = DatabaseConn().createStatement();
+            table = dbStatement.executeQuery("SELECT  firstName as FIRST,lastName as LAST,phoneNumber as PHONE,location AS BUILDING,aptNumber as APT ,numberOfBedrooms as BEDS,numberOfBathRoom as BATH ,price as RENT \n"
+                    + "FROM user\n"
+                    + "INNER JOIN applicant\n"
+                    + "ON user.iduser=applicant.iduser\n"
+                    + "INNER JOIN apartmentlocation\n"
+                    + "ON applicant.iduser=apartmentlocation.iduser WHERE accepted = 1;");
+
+        } catch (SQLException ex) {
+            Logger.getLogger(Database.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        // return ClientRs;
+        //   return ClientRs;
+        return table;
+
+    }//End of setTenant
+
+    public ResultSet getValuesFromTenantsTableDB(String aptNumber) {
+
+        ResultSet table = null;
+        try {
+            dbStatement = DatabaseConn().createStatement();
+            table = dbStatement.executeQuery("SELECT firstName,lastName,userName,phoneNumber,location,aptNumber,numberOfBedrooms,price, numberOfBathRoom\n"
+                    + "FROM user\n"
+                    + "INNER JOIN applicant\n"
+                    + "ON user.iduser=applicant.iduser\n"
+                    + "INNER JOIN apartmentlocation\n"
+                    + "ON applicant.iduser=apartmentlocation.iduser WHERE aptNumber = '" + aptNumber + "';");
+
+        } catch (SQLException ex) {
+            Logger.getLogger(Database.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        // return ClientRs;
+        //   return ClientRs;
+        return table;
+
+    }//End of setTenant
+
+    public ArrayList updateTenantRent(String first, String last, String phone, String location, String aptNumber, String amount) {
+        String sql;
+        ArrayList<String> admin = new ArrayList<>();
+        Date date = new Date();
+        String[] time = date.toString().split(" ");
+        
+        int idApartment = 0;
+        String  currentMonth =time[1];
+        System.out.println("currentMonth.toLowerCase()" + currentMonth.toLowerCase());
+        try {
+            dbStatement = DatabaseConn().createStatement();
+
+            sql = "SELECT idapartmentlocation FROM apartrmentrentaldb.apartmentlocation where aptNumber = '" + aptNumber + "';";
+            rs = dbStatement.executeQuery(sql);
+
+            while (rs.next()) {
+                idApartment = rs.getInt("idapartmentlocation");
+
+            }
+
+            sql = "UPDATE apartmentlocation\n"
+                    + "                    SET "+currentMonth.toLowerCase()+"  = '" + amount + "'\n"
+                    + "                   WHERE idapartmentlocation=\n"
+                    + "                  '" + idApartment + "';";
+
+          
+
+            dbStatement.executeUpdate(sql);
+            JOptionPane.showMessageDialog(null, "Rent Paid Amount: " + amount);
+        } catch (SQLException ex) {
+            Logger.getLogger(Database.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        return admin;
+
+    }//End of updateAdminTable
     //Update
     //Create
     //Delele
+
 }

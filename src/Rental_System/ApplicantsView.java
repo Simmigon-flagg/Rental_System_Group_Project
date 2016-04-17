@@ -23,9 +23,9 @@ public class ApplicantsView extends javax.swing.JPanel {
         initComponents();
         btnToApplication.setVisible(false);
 
-        System.out.println("application.setApplicationTable();");
+       // System.out.println("application.setApplicationTable();");
         tblApplication.setModel(DbUtils.resultSetToTableModel(application.setApplicationTable()));
-        System.out.println("application.closeDatabase();");
+     //   System.out.println("application.closeDatabase();");
         application.closeDatabase();
     }
 
@@ -327,7 +327,7 @@ public class ApplicantsView extends javax.swing.JPanel {
                         .addComponent(jTextField20, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jTextField21, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(36, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         jPanel1Layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {jTextField1, jTextField10});
@@ -391,7 +391,7 @@ public class ApplicantsView extends javax.swing.JPanel {
             .addGroup(jPanel4Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(271, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)

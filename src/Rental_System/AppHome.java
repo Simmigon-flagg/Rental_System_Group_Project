@@ -263,7 +263,7 @@ public class AppHome extends javax.swing.JFrame {
 
         Object[] login = user.login();
         lblLoginName.setText(login[1].toString());
-        System.out.println();
+       // System.out.println();
         if ((boolean) login[0]) {
             showCardView.show(cardPanels, "Admins");
             Credentials("Admins");

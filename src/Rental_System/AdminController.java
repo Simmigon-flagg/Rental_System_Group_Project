@@ -23,13 +23,13 @@ public class AdminController extends AdminView {
 
         String[] time = date.toString().split(" ");
         for (String time1 : time) {
-            System.out.println("Time:" + time1);
+        //    System.out.println("Time:" + time1);
             if (count == 2) {
                 Object f = txtNewFirst.getText();
                 String l = txtNewLast.getText();
                 
-                System.out.println(" "+f.toString());
-                System.out.println(" "+l);
+              //  System.out.println(" "+f.toString());
+            //    System.out.println(" "+l);
               //  char fl = f.toUpperCase().charAt(0);
               //  char ll = l.toUpperCase().charAt(0);
                // makePassword.append(fl).append(ll).append(time1);
@@ -43,7 +43,7 @@ public class AdminController extends AdminView {
             }
             count++;
         }
-        System.out.println("makePassword.append(time1);" + makePassword);
+      //  System.out.println("makePassword.append(time1);" + makePassword);
     }
 
 }
