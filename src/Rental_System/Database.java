@@ -704,4 +704,32 @@ public class Database {
         return Application;
 
     }//End of getApplicationTable
+    
+    
+    public ResultSet getApartmentUnit() {
+
+        ResultSet table = null;
+        ArrayList<String> Application = new ArrayList<>();
+        try {
+            dbStatement = DatabaseConn().createStatement();
+            
+                table = dbStatement.executeQuery("SELECT DISTINCT idapartmentlocation as ID,location as Place ,aptNumber as UNIT ,price as RENT,numberOfBedrooms as BEDS, numberOfBathRoom as BATH FROM apartmentlocation Where iduser = 0;");
+
+//            while (table.next()) {
+//                Application.add(table.getString("UNUTID"));
+//                Application.add(table.getString("LOCATION"));
+//                Application.add(table.getString("UNIT"));
+//                Application.add(table.getString("RENT"));
+//                Application.add(table.getString("BEDS"));
+//                Application.add(table.getString("BATHS"));
+//
+//            }
+        } catch (SQLException ex) {
+            Logger.getLogger(Database.class.getName()).log(Level.SEVERE, null, ex);
+        }
+      //  System.out.println("admin: " + Application);
+
+        return table;
+
+    }//End of getApplicationTable
 }
