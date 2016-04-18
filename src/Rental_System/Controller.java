@@ -5,7 +5,7 @@
  */
 package Rental_System;
 
-import static Rental_System.AppHome.connection;
+
 import java.util.ArrayList;
 import net.proteanit.sql.DbUtils;
 

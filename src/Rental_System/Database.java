@@ -107,7 +107,7 @@ public class Database {
 
     }//End of getAllUser
 
-    public ResultSet addNewAdmin(String firstName, String lastName, String dateOfBirth, StringBuilder password) {
+    public ResultSet addNewAdmin(String firstName, String lastName, String dateOfBirth, String password) {
 
         date = new Date();
         time = date.toString().split(" ");
@@ -123,9 +123,9 @@ public class Database {
                 + "                VALUES \n"
                 + "                ( '" + firstName + "',\n"
                 + "               '" + lastName + " ',\n"
-                + "               ' " + firstName + "',\n"
+                + "               '" + firstName + "',\n"
                 + "              '" + dateOfBirth + "',\n"
-                + "               '" + password + " ',\n"
+                + "               '" + password + "',\n"
                 + "                '" + 1 + "',\n"
                 + "               '" + 1 + "');";
         try {
@@ -448,34 +448,38 @@ public class Database {
     public Object[] isLogin(String email, String password) {
         boolean isLogin = false;
 
-        Object[] user = new Object[2];
+        Object[] user = new Object[5];
         user[0] = isLogin;
-        sql = "SELECT userName,pass,firstName FROM user"
+        sql = "SELECT firstName,userName,pass, is_admin,is_client FROM user"
                 + " WHERE userName = \'" + email + "\'"
                 + " AND pass = \'" + password + "\';";
 
         try {
+            
 
             dbStatement = DatabaseConn().createStatement();
 
             rs = dbStatement.executeQuery(sql);
-            String theemail = null;
-            String passwordDB = null;
-            String name = null;
+            
             while (rs.next()) {
-
-                theemail = rs.getString("userName");
-                passwordDB = rs.getString("pass");
-                name = rs.getString("firstName");
-
-            }
-            if (email.equals(theemail) && theemail != null
-                    && password.equals(passwordDB) && passwordDB != null) {
-
+                System.out.println("Here Too?");
+//                theemail = rs.getString("userName");
+//                passwordDB = rs.getString("pass");
+//                name = rs.getString("firstName");
                 user[0] = true;
-                user[1] = name;
+                user[1] = rs.getString("firstName");
+                user[2] = rs.getString("pass");
+                user[3] = rs.getInt("is_admin");
+                user[4] = rs.getInt("is_client");
 
             }
+//            if (email.equals(theemail) && theemail != null
+//                    && password.equals(passwordDB) && passwordDB != null) {
+//
+//                
+//                user[1] = name;
+//
+//            }
 
             conn.close();
 
@@ -569,13 +573,13 @@ public class Database {
 
     public ArrayList updateTenantRent(String first, String last, String phone, String location, String aptNumber, String amount) {
         String sql;
-        ArrayList<String> admin = new ArrayList<>();
+        ArrayList<String> tenantRent = new ArrayList<>();
         Date date = new Date();
         String[] time = date.toString().split(" ");
 
         int idApartment = 0;
         String currentMonth = time[1];
-        System.out.println("currentMonth.toLowerCase()" + currentMonth.toLowerCase());
+        // System.out.println("currentMonth.toLowerCase()" + currentMonth.toLowerCase());
         try {
             dbStatement = DatabaseConn().createStatement();
 
@@ -598,7 +602,7 @@ public class Database {
             Logger.getLogger(Database.class.getName()).log(Level.SEVERE, null, ex);
         }
 
-        return admin;
+        return tenantRent;
 
     }//End of updateAdminTable
     //Update
@@ -631,7 +635,7 @@ public class Database {
 
     }//End of setApplicationTable
 
-    public void addNewApplication(String first, String last,String emailIsUserName, String DOB, String socialSecurity, String streetAddress, String city, String state, String zip, String phone, String employeeName, String job, String check) {
+    public void addNewApplication(String first, String last, String emailIsUserName, String DOB, String socialSecurity, String streetAddress, String city, String state, String zip, String phone, String employeeName, String job, String check) {
 
         try {
             dbStatement = DatabaseConn().createStatement();
@@ -639,7 +643,7 @@ public class Database {
                     + "(\n"
                     + "`firstName`,\n"
                     + "`lastName`,\n"
-                     + "`userName`,\n"
+                    + "`userName`,\n"
                     + "`dateOfBirth`)\n"
                     + "VALUES ( '" + first + "','" + last + "','" + emailIsUserName + "','" + DOB + "');\n";
             dbStatement.executeUpdate(sql);
@@ -667,22 +671,23 @@ public class Database {
                     + "VALUES\n"
                     + "(" + lastInsertedId + ",'" + socialSecurity + "','" + streetAddress + "','" + city + "','" + state + "','" + zip + "','" + phone + "','" + employeeName + "','" + job + "','" + check + "',0);";
             dbStatement.executeUpdate(sql);
-  JOptionPane.showMessageDialog(null, "Added New: Applicant");
+            JOptionPane.showMessageDialog(null, "Added New: Applicant");
         } catch (SQLException ex) {
             Logger.getLogger(Database.class.getName()).log(Level.SEVERE, null, ex);
         }
 
     }//End of setNewApplication
+
     public ArrayList getApplication(String idApplcation) {
 
         ResultSet table = null;
         ArrayList<String> Application = new ArrayList<>();
         try {
             dbStatement = DatabaseConn().createStatement();
-                table = dbStatement.executeQuery("SELECT idapplicant as Application ,firstName as First, lastName as Last, phoneNumber as Phone ,userName as Email, criminalBackgroundCheck as Background, accepted\n" +
-"                    FROM `apartrmentrentaldb`.`user`\n" +
-"                     JOIN applicant\n" +
-"                    ON user.iduser=applicant.iduser WHERE idapplicant = '"+idApplcation+"';");
+            table = dbStatement.executeQuery("SELECT idapplicant as Application ,firstName as First, lastName as Last, phoneNumber as Phone ,userName as Email, criminalBackgroundCheck as Background, accepted\n"
+                    + "                    FROM `apartrmentrentaldb`.`user`\n"
+                    + "                     JOIN applicant\n"
+                    + "                    ON user.iduser=applicant.iduser WHERE idapplicant = '" + idApplcation + "';");
 
             while (table.next()) {
                 Application.add(table.getString("Application"));
@@ -692,8 +697,6 @@ public class Database {
                 Application.add(table.getString("Email"));
                 Application.add(table.getString("Background"));
                 Application.add(table.getString("accepted"));
-               
-             
 
             }
         } catch (SQLException ex) {
@@ -704,32 +707,101 @@ public class Database {
         return Application;
 
     }//End of getApplicationTable
-    
-    
+
     public ResultSet getApartmentUnit() {
 
         ResultSet table = null;
         ArrayList<String> Application = new ArrayList<>();
         try {
             dbStatement = DatabaseConn().createStatement();
-            
-                table = dbStatement.executeQuery("SELECT DISTINCT idapartmentlocation as ID,location as Place ,aptNumber as UNIT ,price as RENT,numberOfBedrooms as BEDS, numberOfBathRoom as BATH FROM apartmentlocation Where iduser = 0;");
 
-//            while (table.next()) {
-//                Application.add(table.getString("UNUTID"));
-//                Application.add(table.getString("LOCATION"));
-//                Application.add(table.getString("UNIT"));
-//                Application.add(table.getString("RENT"));
-//                Application.add(table.getString("BEDS"));
-//                Application.add(table.getString("BATHS"));
-//
-//            }
+            table = dbStatement.executeQuery("SELECT DISTINCT idapartmentlocation as ID,location as Place ,aptNumber as UNIT ,price as RENT,numberOfBedrooms as BEDS, numberOfBathRoom as BATHS FROM apartmentlocation Where iduser = 0;");
         } catch (SQLException ex) {
             Logger.getLogger(Database.class.getName()).log(Level.SEVERE, null, ex);
         }
-      //  System.out.println("admin: " + Application);
+        //  System.out.println("admin: " + Application);
 
         return table;
 
     }//End of getApplicationTable
+
+    public ArrayList getApartmentUnitAndPrice(String id) {
+
+        ResultSet table = null;
+        ArrayList<String> Application = new ArrayList<>();
+        try {
+            dbStatement = DatabaseConn().createStatement();
+
+            table = dbStatement.executeQuery("SELECT DISTINCT idapartmentlocation as ID,"
+                    + "location as Place ,aptNumber as UNIT ,"
+                    + "price as RENT,numberOfBedrooms as BEDS,"
+                    + "numberOfBathRoom as BATHS FROM apartmentlocation Where idapartmentlocation = '" + id + "';");
+
+            while (table.next()) {
+                Application.add(table.getString("ID"));
+                Application.add(table.getString("PLACE"));
+                Application.add(table.getString("UNIT"));
+                Application.add(table.getString("RENT"));
+                Application.add(table.getString("BEDS"));
+                Application.add(table.getString("BATHS"));
+
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(Database.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        //  System.out.println("admin: " + Application);
+
+        return Application;
+
+    }//End of getApplicationTable
+
+    public ArrayList addTenant(int accepted, int criminalBackgroundCheck, String idapplicant, String idapartmentlocation, String tempEmail) {
+        String sql;
+        int iduser = 0;
+        ArrayList<String> tenantRent = new ArrayList<>();
+        Date date = new Date();
+        String[] time = date.toString().split(" ");
+
+        int idApartment = 0;
+        String currentMonth = time[1];
+        // System.out.println("currentMonth.toLowerCase()" + currentMonth.toLowerCase());
+        try {
+            dbStatement = DatabaseConn().createStatement();
+            //Updates the Application Table
+            sql = "UPDATE `apartrmentrentaldb`.`applicant` "
+                    + "SET `accepted`='" + accepted + "', `criminalBackgroundCheck`='" + criminalBackgroundCheck + "' "
+                    + "WHERE `idapplicant`='" + idapplicant + "';";
+
+            dbStatement.executeUpdate(sql);
+
+            if (accepted == 1) {
+                sql = "SELECT `user`.`iduser`\n"
+                        + "FROM `apartrmentrentaldb`.`user` WHERE userName = '" + tempEmail + "';";
+
+                rs = dbStatement.executeQuery(sql);
+
+                while (rs.next()) {
+                    iduser = rs.getInt("iduser");
+                }
+                //Updates the location table
+                sql = "UPDATE `apartrmentrentaldb`.`apartmentlocation`"
+                        + "SET `iduser`='" + iduser + "' "
+                        + "WHERE `idapartmentlocation`='" + idapartmentlocation + "';";
+
+                dbStatement.executeUpdate(sql);
+
+                JOptionPane.showMessageDialog(null, "Tenant Added");
+            } else {
+
+                JOptionPane.showMessageDialog(null, "Rejected Tenant");
+
+            }
+
+        } catch (SQLException ex) {
+            Logger.getLogger(Database.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        return tenantRent;
+
+    }//End of updateAdminTable
 }

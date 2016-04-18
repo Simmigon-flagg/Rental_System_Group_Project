@@ -10,6 +10,8 @@ import java.sql.ResultSet;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
+import javax.swing.JOptionPane;
+import net.proteanit.sql.DbUtils;
 
 /**
  *
@@ -20,12 +22,12 @@ public class AppHome extends javax.swing.JFrame {
     /**
      * Creates new form LoginView
      */
-    static Database connection = new Database();
-    LoginController user = new LoginController();
+    Database connection = new Database();
+    //LoginController user = new LoginController();
     CardLayout showCardView = null;
-
+    
     private String CredentialsLevel = "";
-
+    
     public AppHome() {
         initComponents();
         // Set when login
@@ -36,16 +38,16 @@ public class AppHome extends javax.swing.JFrame {
             @Override
             public void run() {
                 while (true) {
-                   
+                    
                     String[] time;
                     Date date = new Date();
                     labelTime.setText(date.toString());
-
+                    
                 }
-
+                
             }
         }.start();
-
+        
     }
 
     /**
@@ -63,15 +65,17 @@ public class AppHome extends javax.swing.JFrame {
         btnAdmins = new javax.swing.JButton();
         btnEmployees = new javax.swing.JButton();
         btnMaintenance = new javax.swing.JButton();
-        btnLogin = new javax.swing.JButton();
-        btnLoginCancel = new javax.swing.JButton();
         btnReports = new javax.swing.JButton();
         jPanel1 = new javax.swing.JPanel();
         lblLoginName = new javax.swing.JLabel();
         labelTime = new javax.swing.JLabel();
+        btnLogout = new javax.swing.JButton();
         PanelCard = new javax.swing.JPanel();
         cardPanels = new javax.swing.JPanel();
-        loginView1 = new Rental_System.LoginView();
+        login = new javax.swing.JPanel();
+        txtLoginName = new javax.swing.JTextField();
+        txtPasswordLogin = new javax.swing.JPasswordField();
+        btnLogin = new javax.swing.JButton();
         adminView1 = new Rental_System.AdminView();
         tenantsView1 = new Rental_System.TenantsView();
         maintenanceView1 = new Rental_System.MaintenanceView();
@@ -124,20 +128,6 @@ public class AppHome extends javax.swing.JFrame {
             }
         });
 
-        btnLogin.setText("Login");
-        btnLogin.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnLoginActionPerformed(evt);
-            }
-        });
-
-        btnLoginCancel.setText("Cancel");
-        btnLoginCancel.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnLoginCancelActionPerformed(evt);
-            }
-        });
-
         btnReports.setText("Reports");
         btnReports.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -159,19 +149,13 @@ public class AppHome extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnReports, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btnLogin, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btnLoginCancel, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnAdmins, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnEmployees)
-                .addGap(83, 83, 83))
+                .addContainerGap())
         );
 
         panelButtonLayout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {btnAdmins, btnApplicants, btnEmployees, btnTenants});
-
-        panelButtonLayout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {btnLogin, btnLoginCancel});
 
         panelButtonLayout.setVerticalGroup(
             panelButtonLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -183,8 +167,6 @@ public class AppHome extends javax.swing.JFrame {
                     .addComponent(btnEmployees)
                     .addComponent(btnMaintenance)
                     .addComponent(btnAdmins)
-                    .addComponent(btnLogin)
-                    .addComponent(btnLoginCancel)
                     .addComponent(btnReports))
                 .addContainerGap(16, Short.MAX_VALUE))
         );
@@ -197,6 +179,13 @@ public class AppHome extends javax.swing.JFrame {
 
         lblLoginName.setText("Welcome, ");
 
+        btnLogout.setText("Logout");
+        btnLogout.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnLogoutActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -204,17 +193,22 @@ public class AppHome extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(lblLoginName, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 570, Short.MAX_VALUE)
-                .addComponent(labelTime, javax.swing.GroupLayout.PREFERRED_SIZE, 227, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 478, Short.MAX_VALUE)
+                .addComponent(labelTime, javax.swing.GroupLayout.PREFERRED_SIZE, 227, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(btnLogout, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblLoginName)
-                    .addComponent(labelTime, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(23, Short.MAX_VALUE))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(lblLoginName)
+                        .addComponent(labelTime, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(btnLogout))
+                .addContainerGap(14, Short.MAX_VALUE))
         );
 
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
@@ -228,8 +222,38 @@ public class AppHome extends javax.swing.JFrame {
         cardPanels.setPreferredSize(new java.awt.Dimension(700, 300));
         cardPanels.setLayout(new java.awt.CardLayout());
 
-        loginView1.setOpaque(true);
-        cardPanels.add(loginView1, "Login View");
+        btnLogin.setText("Login");
+        btnLogin.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnLoginActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout loginLayout = new javax.swing.GroupLayout(login);
+        login.setLayout(loginLayout);
+        loginLayout.setHorizontalGroup(
+            loginLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, loginLayout.createSequentialGroup()
+                .addContainerGap(65, Short.MAX_VALUE)
+                .addGroup(loginLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addComponent(txtPasswordLogin)
+                    .addComponent(txtLoginName, javax.swing.GroupLayout.DEFAULT_SIZE, 176, Short.MAX_VALUE)
+                    .addComponent(btnLogin, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(479, 479, 479))
+        );
+        loginLayout.setVerticalGroup(
+            loginLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(loginLayout.createSequentialGroup()
+                .addGap(19, 19, 19)
+                .addComponent(txtLoginName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(txtPasswordLogin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(11, 11, 11)
+                .addComponent(btnLogin)
+                .addContainerGap(211, Short.MAX_VALUE))
+        );
+
+        cardPanels.add(login, "Login View");
         cardPanels.add(adminView1, "Admins");
         cardPanels.add(tenantsView1, "Tenants");
         cardPanels.add(maintenanceView1, "Maintenance");
@@ -237,7 +261,7 @@ public class AppHome extends javax.swing.JFrame {
         cardPanels.add(clientView1, "Clients");
         cardPanels.add(reportsView1, "Reports");
 
-        PanelCard.add(cardPanels, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 11, -1, -1));
+        PanelCard.add(cardPanels, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 1, 720, 310));
 
         getContentPane().add(PanelCard, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 117, 935, 330));
 
@@ -259,40 +283,18 @@ public class AppHome extends javax.swing.JFrame {
         showCardView.show(cardPanels, "Maintenance");
     }//GEN-LAST:event_btnMaintenanceActionPerformed
 
-    private void btnLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoginActionPerformed
-
-        Object[] login = user.login();
-        lblLoginName.setText(login[1].toString());
-       // System.out.println();
-        if ((boolean) login[0]) {
-            showCardView.show(cardPanels, "Admins");
-            Credentials("Admins");
-        } else {
-            Credentials("Clients");
-        }
-
-
-    }//GEN-LAST:event_btnLoginActionPerformed
-
-    private void btnLoginCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoginCancelActionPerformed
-        // TODO add your handling code here:
-
-    }//GEN-LAST:event_btnLoginCancelActionPerformed
-
     private void btnTenantsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTenantsActionPerformed
         
-        
-        //Show Tenants Card
         showCardView.show(cardPanels, "Tenants");
+
     }//GEN-LAST:event_btnTenantsActionPerformed
 
     private void btnAdminsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAdminsActionPerformed
-        // TODO add your handling code here:
         showCardView.show(cardPanels, "Admins");
     }//GEN-LAST:event_btnAdminsActionPerformed
 
     private void btnEmployeesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEmployeesActionPerformed
-        // TODO add your handling code here:
+        
         showCardView.show(cardPanels, "Clients");
     }//GEN-LAST:event_btnEmployeesActionPerformed
 
@@ -300,14 +302,59 @@ public class AppHome extends javax.swing.JFrame {
         // TODO add your handling code here:
         showCardView.show(cardPanels, "Reports");
     }//GEN-LAST:event_btnReportsActionPerformed
-    public final void Credentials(String CredentialsLevel) {
 
-        String name = null;
+    private void btnLogoutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLogoutActionPerformed
+        txtLoginName.setText(null);
+        txtPasswordLogin.setText(null);
+        btnLogin.setVisible(true);
+        
+        showCardView.show(cardPanels, "Login View");
+        // showCardView = (CardLayout) login.getLayout();
 
+    }//GEN-LAST:event_btnLogoutActionPerformed
+
+    private void btnLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoginActionPerformed
+        char[] p = txtPasswordLogin.getPassword();
+        String pass = new String();
+        for (int i = 0; i < p.length; i++) {
+            char q = p[i];
+            pass += q;
+        }
+        
+        Object[] logins = connection.isLogin(txtLoginName.getText(), pass);
+        connection.closeDatabase();
+        
+        System.out.println("Login Name:" + txtLoginName.getText());
+        System.out.println("Login pass:" + pass);
+        
+        for (Object login1 : logins) {
+            System.out.println("login stuff: " + login1);
+        }
+        
+        if ((boolean) logins[0] && (int) logins[3] == 1) {
+            Credentials("Admins");
+            showCardView.show(cardPanels, "Admins");
+            lblLoginName.setText("Admin : " + logins[1]);//get user Name if admin;
+        } else if ((boolean) logins[0] && (int) logins[4] == 1) {
+            Credentials("Client");
+            showCardView.show(cardPanels, "Applicants");
+            lblLoginName.setText("Employee : " + logins[1]);//get user Name if admin;
+        } else {
+            JOptionPane.showMessageDialog(panelButton, "Invalid password");
+            
+        }
+        txtLoginName.setText(null);
+        txtPasswordLogin.setText(null);
+    }//GEN-LAST:event_btnLoginActionPerformed
+    public void Credentials(String CredentialsLevel) {
+        
+        String name = new String();
+        
         switch (CredentialsLevel) {
             case "Admins":
-                lblLoginName.setText(name + "Admin");//get user Name if admin;
-                showCardView.show(cardPanels, CredentialsLevel);
+                // lblLoginName.setText(name + "Admin");//get user Name if admin;
+                showCardView.show(cardPanels, "Admins");
+                //  showCardView.show(cardPanels, CredentialsLevel);
 
                 btnAdmins.setVisible(true);
                 btnApplicants.setVisible(true);
@@ -315,29 +362,44 @@ public class AppHome extends javax.swing.JFrame {
                 btnMaintenance.setVisible(true);
                 btnTenants.setVisible(true);
                 btnReports.setVisible(true);
-
+                
                 btnLogin.setVisible(false);
-                btnLoginCancel.setVisible(false);
+                // btnLoginCancel.setVisible(false);
                 break;
             case "Client":
-
+                
                 lblLoginName.setText(name + "");//
-                showCardView.show(cardPanels, CredentialsLevel);
+                showCardView.show(cardPanels, "Applicants");
+                //    showCardView.show(cardPanels, CredentialsLevel);
 
                 btnMaintenance.setVisible(true);
                 btnTenants.setVisible(true);
                 btnApplicants.setVisible(true);
                 btnReports.setVisible(true);
-
+                
                 btnAdmins.setVisible(false);
                 btnEmployees.setVisible(false);
                 btnLogin.setVisible(false);
-                btnLoginCancel.setVisible(false);
+                //  btnLoginCancel.setVisible(false);
 
                 break;
+            case "Login View":
+                
+                showCardView.show(cardPanels, "Login View");
 
+                lblLoginName.setText("");
+                //    showCardView = (CardLayout) cardPanels.getLayout();
+                btnApplicants.setVisible(false);
+                btnMaintenance.setVisible(false);
+                btnTenants.setVisible(false);
+                btnAdmins.setVisible(false);
+                btnEmployees.setVisible(false);
+                btnReports.setVisible(false);
+                
+                break;
+            
             default:
-
+                
                 lblLoginName.setText("");
                 showCardView = (CardLayout) cardPanels.getLayout();
                 btnApplicants.setVisible(false);
@@ -348,7 +410,7 @@ public class AppHome extends javax.swing.JFrame {
                 btnReports.setVisible(false);
                 break;
         }
-
+        
     }
 
     /**
@@ -396,7 +458,7 @@ public class AppHome extends javax.swing.JFrame {
     private javax.swing.JButton btnApplicants;
     private javax.swing.JButton btnEmployees;
     private javax.swing.JButton btnLogin;
-    private javax.swing.JButton btnLoginCancel;
+    private javax.swing.JButton btnLogout;
     private javax.swing.JButton btnMaintenance;
     private javax.swing.JButton btnReports;
     private javax.swing.JButton btnTenants;
@@ -404,11 +466,13 @@ public class AppHome extends javax.swing.JFrame {
     private Rental_System.ClientView clientView1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JLabel labelTime;
-    private javax.swing.JLabel lblLoginName;
-    private Rental_System.LoginView loginView1;
+    public javax.swing.JLabel lblLoginName;
+    private javax.swing.JPanel login;
     private Rental_System.MaintenanceView maintenanceView1;
     public javax.swing.JPanel panelButton;
     private Rental_System.ReportsView reportsView1;
     private Rental_System.TenantsView tenantsView1;
+    private javax.swing.JTextField txtLoginName;
+    public javax.swing.JPasswordField txtPasswordLogin;
     // End of variables declaration//GEN-END:variables
 }

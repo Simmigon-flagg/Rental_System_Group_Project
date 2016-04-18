@@ -5,8 +5,6 @@
  */
 package Rental_System;
 
-import java.awt.CardLayout;
-import java.util.Arrays;
 
 /**
  *
@@ -19,6 +17,7 @@ public class LoginView extends javax.swing.JPanel {
      */
     public LoginView() {
         initComponents();
+
     }
 
     /**
@@ -35,6 +34,7 @@ public class LoginView extends javax.swing.JPanel {
         jLabel2 = new javax.swing.JLabel();
         txtPasswordLogin = new javax.swing.JPasswordField();
         txtLoginName = new javax.swing.JTextField();
+        btnLogin = new javax.swing.JButton();
 
         setOpaque(false);
         setPreferredSize(new java.awt.Dimension(700, 308));
@@ -50,6 +50,13 @@ public class LoginView extends javax.swing.JPanel {
 
         txtLoginName.setText("admin@admin.com");
 
+        btnLogin.setText("jButton1");
+        btnLogin.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnLoginActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -64,7 +71,9 @@ public class LoginView extends javax.swing.JPanel {
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jLabel2)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(txtPasswordLogin)))
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(btnLogin)
+                            .addComponent(txtPasswordLogin))))
                 .addContainerGap(88, Short.MAX_VALUE))
         );
 
@@ -81,7 +90,9 @@ public class LoginView extends javax.swing.JPanel {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
                     .addComponent(txtPasswordLogin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(225, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(btnLogin)
+                .addContainerGap(191, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
@@ -102,12 +113,39 @@ public class LoginView extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton1ActionPerformed
+    private void btnLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoginActionPerformed
+
+//        char[] p = txtPasswordLogin.getPassword();
+//        String pass = "";
+//        for (int i = 0;
+//                i < p.length;
+//                i++) {
+//            char q = p[i];
+//            pass += q;
+//        }
+//        Object[] logins
+//                = connection.isLogin(txtLoginName.getText(), pass);
+//        connection.closeDatabase();
+//        AppHome home;
+//        if ((boolean) logins[0] && (int) logins[3] == 1) {
+//            home = new AppHome();
+//            home.Credentials("Admin");
+//            System.out.println("Here");
+//
+//            home.lblLoginName.setText("Admin");
+//
+//        } else {
+//            home = new AppHome();
+//            home.Credentials("Clients");
+//            home.lblLoginName.setText("Client");
+//
+//        }
+
+    }//GEN-LAST:event_btnLoginActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    public javax.swing.JButton btnLogin;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;

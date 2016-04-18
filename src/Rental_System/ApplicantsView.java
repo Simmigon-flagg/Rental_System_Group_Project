@@ -19,7 +19,11 @@ public class ApplicantsView extends javax.swing.JPanel {
      */
     Database application = new Database();
     ClientsController control = new ClientsController();
-
+    ArrayList<String> apartmentListPrice = new ArrayList<>();
+    String application_id = new String();
+    String idApplication;
+    String tempEmail;
+    
     public ApplicantsView() {
         initComponents();
       //  btnToApplication.setVisible(false);
@@ -79,7 +83,6 @@ public class ApplicantsView extends javax.swing.JPanel {
         txtJobs = new javax.swing.JTextField();
         AddTenant = new javax.swing.JScrollPane();
         jPanel1 = new javax.swing.JPanel();
-        lblApplicationNumber = new javax.swing.JLabel();
         lblApplicantsFullName = new javax.swing.JLabel();
         lblPhoneNumber = new javax.swing.JLabel();
         lblEmail = new javax.swing.JLabel();
@@ -92,6 +95,12 @@ public class ApplicantsView extends javax.swing.JPanel {
         jScrollPane1 = new javax.swing.JScrollPane();
         tableAparments = new javax.swing.JTable();
         btnCancel = new javax.swing.JButton();
+        jPanel3 = new javax.swing.JPanel();
+        lblUnit = new javax.swing.JLabel();
+        lblbeds = new javax.swing.JLabel();
+        lblBaths = new javax.swing.JLabel();
+        lblLocation = new javax.swing.JLabel();
+        lblRent = new javax.swing.JLabel();
 
         setMaximumSize(new java.awt.Dimension(0, 0));
         setPreferredSize(new java.awt.Dimension(700, 308));
@@ -373,8 +382,6 @@ public class ApplicantsView extends javax.swing.JPanel {
 
         panApplCard.add(tabApplicants, "card2");
 
-        lblApplicationNumber.setText("Application Number: ");
-
         lblApplicantsFullName.setText("Application Number: ");
 
         lblPhoneNumber.setText("Application Number: ");
@@ -407,6 +414,7 @@ public class ApplicantsView extends javax.swing.JPanel {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
+        tableAparments.setCellSelectionEnabled(true);
         tableAparments.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 tableAparmentsMouseClicked(evt);
@@ -421,65 +429,97 @@ public class ApplicantsView extends javax.swing.JPanel {
             }
         });
 
+        jPanel3.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+
+        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
+        jPanel3.setLayout(jPanel3Layout);
+        jPanel3Layout.setHorizontalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lblLocation, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblUnit, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblRent, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblbeds, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblBaths, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap())
+        );
+        jPanel3Layout.setVerticalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(lblLocation, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(4, 4, 4)
+                .addComponent(lblUnit, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(lblRent, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(lblbeds, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(lblBaths, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
+        );
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
             .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 649, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(lblApplicantsFullName, javax.swing.GroupLayout.DEFAULT_SIZE, 283, Short.MAX_VALUE)
-                                    .addComponent(lblApplicationNumber, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(lblPhoneNumber, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(lblEmail, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, 131, Short.MAX_VALUE)
-                                    .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 452, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 452, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(btnSubmit, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(cboxBackground, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(cboxAccept, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(btnCancel, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(74, Short.MAX_VALUE))
+                            .addComponent(btnCancel, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(lblApplicantsFullName, javax.swing.GroupLayout.DEFAULT_SIZE, 283, Short.MAX_VALUE)
+                            .addComponent(lblPhoneNumber, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(lblEmail, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, 360, Short.MAX_VALUE)
+                            .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                .addContainerGap(76, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(24, 24, 24)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblApplicationNumber)
-                    .addComponent(jLabel2)
-                    .addComponent(cboxBackground, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(lblApplicantsFullName)
+                            .addComponent(jLabel2)
+                            .addComponent(cboxBackground, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(cboxAccept, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(lblApplicantsFullName)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(lblPhoneNumber)
                             .addComponent(jLabel3))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(lblPhoneNumber))
-                    .addComponent(cboxAccept, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(lblEmail)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(lblEmail)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 290, Short.MAX_VALUE)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(btnSubmit)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btnCancel)
-                        .addGap(0, 0, Short.MAX_VALUE)))
-                .addContainerGap())
+                        .addGap(18, 18, 18)
+                        .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 76, Short.MAX_VALUE)))
+                .addGap(21, 21, 21))
         );
 
         AddTenant.setViewportView(jPanel1);
@@ -517,30 +557,31 @@ public class ApplicantsView extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void tblApplicationMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblApplicationMouseClicked
-
+        
         tableAparments.setModel(DbUtils.resultSetToTableModel(application.getApartmentUnit()));
         application.closeDatabase();
         int row = tblApplication.getSelectedRow();
-
+        
         String idApplication = (tblApplication.getModel().getValueAt(row, 0).toString());
-
+        
         System.out.println("Number " + idApplication);
         ArrayList<String> applicationList = application.getApplication(idApplication);
-        lblApplicationNumber.setText("Application Number: " + applicationList.get(0));
+        application_id = applicationList.get(0);
+        
         lblApplicantsFullName.setText("Full Name: " + applicationList.get(1) + " " + applicationList.get(2));
         lblPhoneNumber.setText("Phone Number: " + applicationList.get(3));
-        lblEmail.setText("Email Address: " + applicationList.get(4));
-
+        tempEmail = applicationList.get(4);
+        lblEmail.setText("Email Address: " + tempEmail);
         application.closeDatabase();
-     //   btnToApplication.setVisible(true);
+        //   btnToApplication.setVisible(true);
         panApplCard.removeAll();
         panApplCard.repaint();
         panApplCard.revalidate();
-
+        
         panApplCard.add(AddTenant);
         panApplCard.repaint();
         panApplCard.revalidate();
-
+        
 
     }//GEN-LAST:event_tblApplicationMouseClicked
 
@@ -550,21 +591,21 @@ public class ApplicantsView extends javax.swing.JPanel {
 
     private void btnSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSaveActionPerformed
         System.out.println("Simmiigpn");
-
+        
         StringBuilder dateOfBirth = new StringBuilder();
         dateOfBirth.append(txtMonth.getText()).append(txtday.getText()).append(txtYear.getText());
-
+        
         application.addNewApplication(txtApplicationFirstName1.getText(), txtApplicationLastName1.getText(), txtApplicationEmail1.getText(), dateOfBirth.toString(), txtApplicationSSN1.getText(), txtApplicationAddress1.getText(), txtApplicationCity1.getText(), cboxApplicationState1.getSelectedItem().toString(), txtApplicationZip1.getText(), txtApplicationPhone1.getText(), txtApplicationEmployee1.getText(), txtJobs.getText(), txtApplicationIncome1.getText());
         application.closeDatabase();
-
+        
         panApplCard.removeAll();
         panApplCard.repaint();
         panApplCard.revalidate();
-
+        
         panApplCard.add(tabApplicants);
         panApplCard.repaint();
         panApplCard.revalidate();
-
+        
         tblApplication.setModel(DbUtils.resultSetToTableModel(application.setApplicationTable()));
         application.closeDatabase();
         ClearTextBox();
@@ -603,40 +644,81 @@ public class ApplicantsView extends javax.swing.JPanel {
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void btnSubmitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSubmitActionPerformed
-
+        
         System.out.println("cboxAccept.getSelectedItem() " + cboxAccept.getSelectedIndex() + "\n  cboxBackground.getSelectedIndex()" + cboxBackground.getSelectedIndex());
+        System.out.println(application_id + " <--- peronsUs " + apartmentListPrice.get(2));
+        System.out.println("Final values accceted: " + cboxAccept.getSelectedIndex() + "backgrount"
+                + "\n " + cboxBackground.getSelectedIndex() + "\n " + application_id + "\n" + application_id + "\n" + idApplication + "\n" + tempEmail);
+        application.addTenant(cboxAccept.getSelectedIndex(), cboxBackground.getSelectedIndex(), application_id, idApplication, tempEmail);
+        
+        lblLocation.setText("");
+        lblUnit.setText("");
+        lblRent.setText("");
+        lblbeds.setText("");
+        lblBaths.setText("");
+        cboxAccept.setSelectedIndex(0);
+        cboxBackground.setSelectedIndex(0);
+
         //Add New Tenant
         panApplCard.removeAll();
         panApplCard.repaint();
         panApplCard.revalidate();
-
+        
         panApplCard.add(tabApplicants);
         panApplCard.repaint();
         panApplCard.revalidate();
-    //    btnToApplication.setVisible(false);
+        
+        tblApplication.setModel(DbUtils.resultSetToTableModel(application.setApplicationTable()));
+        application.closeDatabase();
+        
+       
+    
+        
+
     }//GEN-LAST:event_btnSubmitActionPerformed
 
     private void tableAparmentsMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tableAparmentsMouseClicked
-        // TODO add your handling code here:
+        lblLocation.setText("");
+        lblUnit.setText("");
+        lblRent.setText("");
+        lblbeds.setText("");
+        lblBaths.setText("");
+        int row = tableAparments.getSelectedRow();
+        
+        idApplication = (tableAparments.getModel().getValueAt(row, 0).toString());
+        apartmentListPrice = application.getApartmentUnitAndPrice(idApplication);
+        
+        application.closeDatabase();
+        System.out.println("" + apartmentListPrice.toString());
+        lblLocation.setText("Location: " + apartmentListPrice.get(1));
+        lblUnit.setText("Unit: " + apartmentListPrice.get(2));
+        lblRent.setText("Rent: " + apartmentListPrice.get(3));
+        lblbeds.setText("Beds: " + apartmentListPrice.get(4));
+        lblBaths.setText("Baths: " + apartmentListPrice.get(5));
     }//GEN-LAST:event_tableAparmentsMouseClicked
 
     private void btnCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelActionPerformed
-  tblApplication.setModel(DbUtils.resultSetToTableModel(application.setApplicationTable()));
+        lblLocation.setText("");
+        lblUnit.setText("");
+        lblRent.setText("");
+        lblbeds.setText("");
+        lblBaths.setText("");
+        tblApplication.setModel(DbUtils.resultSetToTableModel(application.setApplicationTable()));
         application.closeDatabase();
         panApplCard.removeAll();
         panApplCard.repaint();
         panApplCard.revalidate();
-
+        
         panApplCard.add(tabApplicants);
         panApplCard.repaint();
         panApplCard.revalidate();
-       // btnToApplication.setVisible(false);
+        // btnToApplication.setVisible(false);
     }//GEN-LAST:event_btnCancelActionPerformed
     public void ClearTextBox() {
-
+        
         txtApplicationFirstName1.setText("");
         txtApplicationLastName1.setText("");
-
+        
         txtApplicationSSN1.setText("");
         txtApplicationEmail1.setText("");
         txtApplicationAddress1.setText("");
@@ -647,7 +729,7 @@ public class ApplicantsView extends javax.swing.JPanel {
         txtApplicationEmployee1.setText("");
         txtJobs.setText("");
         txtApplicationIncome1.setText("");
-
+        
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -677,13 +759,18 @@ public class ApplicantsView extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel30;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
+    private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel7;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JLabel lblApplicantsFullName;
-    private javax.swing.JLabel lblApplicationNumber;
+    private javax.swing.JLabel lblBaths;
     private javax.swing.JLabel lblEmail;
+    private javax.swing.JLabel lblLocation;
     private javax.swing.JLabel lblPhoneNumber;
+    private javax.swing.JLabel lblRent;
+    private javax.swing.JLabel lblUnit;
+    private javax.swing.JLabel lblbeds;
     private javax.swing.JPanel panApplCard;
     private javax.swing.JScrollPane spViewApplications;
     private javax.swing.JTabbedPane tabApplicants;

@@ -387,7 +387,7 @@ public class TenantsView extends javax.swing.JPanel {
     private javax.swing.JPanel panPayRent;
     private javax.swing.JScrollPane spTenant;
     private javax.swing.JTabbedPane tabTenant;
-    private javax.swing.JTable tblTenants;
+    public javax.swing.JTable tblTenants;
     private javax.swing.JTextField txtTenantApartment;
     private javax.swing.JTextField txtTenantEnterBal;
     private javax.swing.JTextField txtTenantFirst;

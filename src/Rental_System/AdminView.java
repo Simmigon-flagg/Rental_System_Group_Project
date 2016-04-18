@@ -25,9 +25,9 @@ public class AdminView extends javax.swing.JPanel {
     public AdminView() {
         initComponents();
         btnBack.setVisible(false);
-    //    System.out.println("admins.setTenantsTable();");
+        //    System.out.println("admins.setTenantsTable();");
         tblAdmins.setModel(DbUtils.resultSetToTableModel(admins.setAdminTable()));
-     //   System.out.println("admins.closeDatabase();");
+        //   System.out.println("admins.closeDatabase();");
         admins.closeDatabase();
 
     }
@@ -387,19 +387,19 @@ public class AdminView extends javax.swing.JPanel {
 
     private void tblAdminsMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblAdminsMouseClicked
 
-    //    System.out.println("getSingleAdmin();");
+        //    System.out.println("getSingleAdmin();");
         int row = tblAdmins.getSelectedRow();
-       
+
         String idAdmin = (tblAdmins.getModel().getValueAt(row, 0).toString());
 
-      //  System.out.println("Number " + idAdmin);
+        //  System.out.println("Number " + idAdmin);
         ArrayList<String> ArrayLis = admins.getAdminTable(idAdmin);
         txtEmployeeIDNumberAdmin.setText(ArrayLis.get(0));
 
         txtNameAdmin.setText(ArrayLis.get(1));
         txtLastNameAdmin.setText(ArrayLis.get(2));
         txtPasswordAdmin.setText(ArrayLis.get(3));
-   //     System.out.println("admins.closeDatabase();");
+        //     System.out.println("admins.closeDatabase();");
         admins.closeDatabase();
         // this will be good for paid.
 
@@ -416,9 +416,9 @@ public class AdminView extends javax.swing.JPanel {
     }//GEN-LAST:event_tblAdminsMouseClicked
 
     private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackActionPerformed
-      //  System.out.println("admins.setTenantsTable();");
+        //  System.out.println("admins.setTenantsTable();");
         tblAdmins.setModel(DbUtils.resultSetToTableModel(admins.setAdminTable()));
-     //   System.out.println("admins.closeDatabase();");
+        //   System.out.println("admins.closeDatabase();");
         admins.closeDatabase();
 
         panCardAdmin.removeAll();
@@ -436,7 +436,7 @@ public class AdminView extends javax.swing.JPanel {
     }//GEN-LAST:event_txtNameAdminActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-   
+
         admins.updateAdminTable(txtEmployeeIDNumberAdmin.getText(), txtNameAdmin.getText(), txtLastNameAdmin.getText(), txtPasswordAdmin.getText());
         admins.closeDatabase();
     }//GEN-LAST:event_jButton1ActionPerformed
@@ -447,8 +447,8 @@ public class AdminView extends javax.swing.JPanel {
 
     private void btnSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSaveActionPerformed
 
-        StringBuilder password = makePassword(txtNewFirst.getText(), txtNewLast.getText(), txtNewSSN.getText());
-        admins.addNewAdmin(txtNewFirst.getText(), txtNewLast.getText(), txtAdminDOB.getText(), password);
+        String password = makePassword(txtNewFirst.getText(), txtNewLast.getText(), txtNewSSN.getText().trim());
+        admins.addNewAdmin(txtNewFirst.getText(), txtNewLast.getText(), txtAdminDOB.getText(), password.trim());
         tblAdmins.setModel(DbUtils.resultSetToTableModel(admins.setAdminTable()));
         admins.closeDatabase();
         ClearTextBoxes();
@@ -467,20 +467,21 @@ public class AdminView extends javax.swing.JPanel {
         txtNewFirst.setText("");
         txtLastNameAdmin.setText("");
         txtNameAdmin.setText("");
-      //  txtNewEmail.setText("");
+        //  txtNewEmail.setText("");
         txtNewLast.setText("");
         txtNewSSN.setText("");
         txtPasswordAdmin.setText("");
 
     }
 
-    public StringBuilder makePassword(String fi, String la, String ssn) {
+    public String makePassword(String fi, String la, String ssn) {
         StringBuilder makePassword = new StringBuilder();
+        String autoGenPassword = new String();
         Date date = new Date();
         int count = 0;
         String[] time = date.toString().split(" ");
         for (String time1 : time) {
-
+            time1 = time1.trim();
             if (count == 2) {
                 char f = fi.toUpperCase().charAt(0);
                 String l = la.toUpperCase().substring(0, 2);
@@ -489,12 +490,13 @@ public class AdminView extends javax.swing.JPanel {
             if (count == 5) {
                 makePassword.append(time1.charAt(2));
                 makePassword.append(time1.charAt(3));
-                makePassword.append(ssn.substring(5, 9));
+                makePassword.append(ssn.substring(5, 9).trim());
+                System.out.println(makePassword);
             }
             count++;
         }
-     //   System.out.println("makePassword");
-        return makePassword;
+        autoGenPassword = makePassword.toString().trim();
+        return autoGenPassword;
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
