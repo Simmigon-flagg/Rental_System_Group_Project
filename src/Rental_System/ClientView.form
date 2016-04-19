@@ -183,16 +183,20 @@
                           </Group>
                           <EmptySpace max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" attributes="0">
-                              <Component id="txtLastEmployee" linkSize="6" min="-2" max="-2" attributes="0"/>
-                              <Component id="txtDob" linkSize="6" min="-2" max="-2" attributes="0"/>
-                              <Component id="txtSocialSecurity" linkSize="6" min="-2" max="-2" attributes="0"/>
-                              <Component id="txtFirstEmployee" linkSize="6" alignment="0" min="-2" pref="129" max="-2" attributes="0"/>
+                              <Group type="102" attributes="0">
+                                  <Component id="txtSocialSecurity" linkSize="6" min="-2" max="-2" attributes="0"/>
+                                  <EmptySpace pref="351" max="32767" attributes="0"/>
+                                  <Component id="btnSubmitEmployee" min="-2" pref="102" max="-2" attributes="0"/>
+                              </Group>
+                              <Group type="102" attributes="0">
+                                  <Group type="103" groupAlignment="0" attributes="0">
+                                      <Component id="txtLastEmployee" linkSize="6" min="-2" max="-2" attributes="0"/>
+                                      <Component id="txtDob" linkSize="6" min="-2" max="-2" attributes="0"/>
+                                      <Component id="txtFirstEmployee" linkSize="6" alignment="0" min="-2" pref="129" max="-2" attributes="0"/>
+                                  </Group>
+                                  <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                              </Group>
                           </Group>
-                          <EmptySpace max="32767" attributes="0"/>
-                      </Group>
-                      <Group type="102" alignment="1" attributes="0">
-                          <EmptySpace max="32767" attributes="0"/>
-                          <Component id="btnSubmitEmployee" min="-2" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
                       </Group>
                   </Group>
@@ -218,11 +222,12 @@
                           <EmptySpace max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" attributes="0">
                               <Component id="jLabel5" min="-2" max="-2" attributes="0"/>
-                              <Component id="txtSocialSecurity" min="-2" max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="3" attributes="0">
+                                  <Component id="txtSocialSecurity" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="btnSubmitEmployee" alignment="3" min="-2" max="-2" attributes="0"/>
+                              </Group>
                           </Group>
-                          <EmptySpace max="-2" attributes="0"/>
-                          <Component id="btnSubmitEmployee" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace pref="13" max="32767" attributes="0"/>
+                          <EmptySpace pref="39" max="32767" attributes="0"/>
                       </Group>
                   </Group>
                 </DimensionLayout>
@@ -258,6 +263,9 @@
                 <Component class="javax.swing.JTextField" name="txtDob">
                 </Component>
                 <Component class="javax.swing.JTextField" name="txtSocialSecurity">
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txtSocialSecurityActionPerformed"/>
+                  </Events>
                 </Component>
                 <Component class="javax.swing.JButton" name="btnSubmitEmployee">
                   <Properties>
