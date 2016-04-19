@@ -121,9 +121,9 @@ public class ClientView extends javax.swing.JPanel {
 
         jLabel3.setText("Last");
 
-        jLabel4.setText("Birth Date:");
+        jLabel4.setText("Birth Date");
 
-        jLabel5.setText("Social Security");
+        jLabel5.setText("Password");
 
         txtFirstEmployee.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -159,7 +159,7 @@ public class ClientView extends javax.swing.JPanel {
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addComponent(txtSocialSecurity, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 351, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 372, Short.MAX_VALUE)
                         .addComponent(btnSubmitEmployee, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -419,10 +419,11 @@ public class ClientView extends javax.swing.JPanel {
     }//GEN-LAST:event_txtEmployeeIDNumberActionPerformed
 
     private void btnSubmitEmployeeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSubmitEmployeeActionPerformed
-        txtFirstEmployee.getText();
-        txtLastEmployee.getText();
-        txtDob.getText();
-        txtSocialSecurity.getText();
+        client.addNewClient(txtFirstEmployee.getText(),txtLastEmployee.getText(),txtDob.getText(),txtSocialSecurity.getText());
+        
+        tblClients.setModel(DbUtils.resultSetToTableModel(client.setClientTable()));
+        client.closeDatabase();
+        ClearTextBox();
 // TODO add your handling code here:
     }//GEN-LAST:event_btnSubmitEmployeeActionPerformed
 
@@ -435,7 +436,14 @@ public class ClientView extends javax.swing.JPanel {
     private void txtSocialSecurityActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtSocialSecurityActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtSocialSecurityActionPerformed
+ public void ClearTextBox() {
 
+      txtFirstEmployee.setText("");
+      txtLastEmployee.setText("");
+      txtDob.setText("");
+      txtSocialSecurity.setText("");
+
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnClientBack;
