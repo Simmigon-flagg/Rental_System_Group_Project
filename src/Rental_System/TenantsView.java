@@ -93,7 +93,7 @@ public class TenantsView extends javax.swing.JPanel {
                 .addContainerGap())
         );
 
-        jLabel1.setText("jLabel1");
+        jLabel1.setText("Apartment Tenants View");
 
         jPanel2.setLayout(new java.awt.CardLayout());
 

@@ -199,7 +199,7 @@ public class MaintenanceView extends javax.swing.JPanel {
                 .addContainerGap())
         );
 
-        jLabel1.setText("jLabel1");
+        jLabel1.setText("Apartment Maintenance");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);

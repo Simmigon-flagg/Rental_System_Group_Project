@@ -119,7 +119,7 @@ public class ApplicantsView extends javax.swing.JPanel {
             .addGap(0, 223, Short.MAX_VALUE)
         );
 
-        jLabel1.setText("jLabel1");
+        jLabel1.setText("Apartment Applications");
 
         panApplCard.setLayout(new java.awt.CardLayout());
 
