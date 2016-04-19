@@ -18,7 +18,7 @@ public class ApplicantsView extends javax.swing.JPanel {
      * Creates new form ApplicantsView
      */
     Database application = new Database();
-    ClientsController control = new ClientsController();
+//    ClientsController control = new ClientsController();
     ArrayList<String> apartmentListPrice = new ArrayList<>();
     String application_id = new String();
     String idApplication;
@@ -661,7 +661,11 @@ public class ApplicantsView extends javax.swing.JPanel {
                 + "\n " + cboxBackground.getSelectedIndex() + "\n " + application_id + "\n" + application_id + "\n" + idApplication + "\n" + tempEmail);
         application.addTenant(cboxAccept.getSelectedIndex(), cboxBackground.getSelectedIndex(), application_id, idApplication, tempEmail);
         Mail sendmail = new Mail();
-        sendmail.mailReport(tempEmail, lblApplicantsFullName.getText(), lblLocation.getText(), lblUnit.getText());
+        if (cboxAccept.getSelectedIndex() == 1 && cboxBackground.getSelectedIndex() == 1) {
+            sendmail.mailReportAccpected(tempEmail, lblApplicantsFullName.getText(), lblLocation.getText(), lblUnit.getText());
+        } else {
+            sendmail.mailReportDeClin(tempEmail, lblApplicantsFullName.getText(), lblLocation.getText(), lblUnit.getText());
+        }
 
         lblLocation.setText("");
         lblUnit.setText("");
