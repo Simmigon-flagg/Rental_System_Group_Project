@@ -162,7 +162,7 @@ public class Database {
                 + "               '" + password + "',\n"
                 + "                '" + 0 + "',\n"
                 + "               '" + 1 + "');";
-        System.out.println("firstName" + "lastName" + "firstName" + "dateOfBirth"+ "password");
+        System.out.println("test"+"firstName" + "lastName" + "firstName" + "dateOfBirth"+ "password");
         try {
             dbStatement = DatabaseConn().createStatement();
             dbStatement.executeUpdate(sql);
