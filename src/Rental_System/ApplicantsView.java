@@ -101,6 +101,7 @@ public class ApplicantsView extends javax.swing.JPanel {
         lblBaths = new javax.swing.JLabel();
         lblLocation = new javax.swing.JLabel();
         lblRent = new javax.swing.JLabel();
+        btnViewUpdates = new javax.swing.JButton();
 
         setMaximumSize(new java.awt.Dimension(0, 0));
         setPreferredSize(new java.awt.Dimension(700, 308));
@@ -526,6 +527,13 @@ public class ApplicantsView extends javax.swing.JPanel {
 
         panApplCard.add(AddTenant, "card3");
 
+        btnViewUpdates.setText("View Updates");
+        btnViewUpdates.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnViewUpdatesActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -534,24 +542,26 @@ public class ApplicantsView extends javax.swing.JPanel {
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(panApplCard, javax.swing.GroupLayout.DEFAULT_SIZE, 674, Short.MAX_VALUE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, 0, Short.MAX_VALUE))
-                    .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel1)
-                        .addGap(0, 0, Short.MAX_VALUE)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btnViewUpdates))
+                    .addComponent(panApplCard, javax.swing.GroupLayout.DEFAULT_SIZE, 674, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, 0, Short.MAX_VALUE)
                 .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel1)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel1)
+                    .addComponent(btnViewUpdates))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jPanel2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 223, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(panApplCard, javax.swing.GroupLayout.DEFAULT_SIZE, 266, Short.MAX_VALUE)
+                        .addComponent(panApplCard, javax.swing.GroupLayout.DEFAULT_SIZE, 257, Short.MAX_VALUE)
                         .addContainerGap())))
         );
     }// </editor-fold>//GEN-END:initComponents
@@ -713,6 +723,12 @@ public class ApplicantsView extends javax.swing.JPanel {
         panApplCard.revalidate();
         // btnToApplication.setVisible(false);
     }//GEN-LAST:event_btnCancelActionPerformed
+
+    private void btnViewUpdatesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnViewUpdatesActionPerformed
+        tblApplication.setModel(DbUtils.resultSetToTableModel(application.setApplicationTable()));
+        //   System.out.println("application.closeDatabase();");
+        application.closeDatabase();        // TODO add your handling code here:
+    }//GEN-LAST:event_btnViewUpdatesActionPerformed
     public void ClearTextBox() {
 
         txtApplicationFirstName1.setText("");
@@ -736,6 +752,7 @@ public class ApplicantsView extends javax.swing.JPanel {
     private javax.swing.JButton btnCancel;
     private javax.swing.JButton btnSave;
     private javax.swing.JButton btnSubmit;
+    private javax.swing.JButton btnViewUpdates;
     private javax.swing.JComboBox cboxAccept;
     private javax.swing.JComboBox cboxApplicationState1;
     private javax.swing.JComboBox cboxBackground;

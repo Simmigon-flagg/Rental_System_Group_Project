@@ -72,6 +72,7 @@ public class AdminView extends javax.swing.JPanel {
         txtLastNameAdmin = new javax.swing.JTextField();
         txtEmployeeIDNumberAdmin = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
+        btnViewUpdates = new javax.swing.JButton();
 
         btnBack.setText("Back");
         btnBack.addActionListener(new java.awt.event.ActionListener() {
@@ -358,6 +359,13 @@ public class AdminView extends javax.swing.JPanel {
 
         panCardAdmin.add(cardAdmin, "card3");
 
+        btnViewUpdates.setText("View Updates");
+        btnViewUpdates.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnViewUpdatesActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -368,7 +376,8 @@ public class AdminView extends javax.swing.JPanel {
                     .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel1)
-                        .addGap(0, 0, Short.MAX_VALUE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btnViewUpdates))
                     .addComponent(panCardAdmin, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
@@ -376,7 +385,9 @@ public class AdminView extends javax.swing.JPanel {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel1)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel1)
+                    .addComponent(btnViewUpdates))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(panCardAdmin, javax.swing.GroupLayout.PREFERRED_SIZE, 215, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -461,6 +472,12 @@ public class AdminView extends javax.swing.JPanel {
         ClearTextBoxes();
     }//GEN-LAST:event_jButton5ActionPerformed
 
+    private void btnViewUpdatesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnViewUpdatesActionPerformed
+        tblAdmins.setModel(DbUtils.resultSetToTableModel(admins.setAdminTable()));
+        //   System.out.println("admins.closeDatabase();");
+        admins.closeDatabase();        // TODO add your handling code here:
+    }//GEN-LAST:event_btnViewUpdatesActionPerformed
+
     public void ClearTextBoxes() {
         txtAdminDOB.setText("");
         txtEmployeeIDNumberAdmin.setText("");
@@ -502,6 +519,7 @@ public class AdminView extends javax.swing.JPanel {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnBack;
     private javax.swing.JButton btnSave;
+    private javax.swing.JButton btnViewUpdates;
     private javax.swing.JPanel cardAdmin;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;

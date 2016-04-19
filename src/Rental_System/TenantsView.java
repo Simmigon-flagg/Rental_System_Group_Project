@@ -65,6 +65,7 @@ public class TenantsView extends javax.swing.JPanel {
         jLabel10 = new javax.swing.JLabel();
         txtTenantEnterBal = new javax.swing.JTextField();
         btnUpdateTenant = new javax.swing.JButton();
+        btnViewUpdates = new javax.swing.JButton();
 
         setPreferredSize(new java.awt.Dimension(700, 308));
 
@@ -87,7 +88,7 @@ public class TenantsView extends javax.swing.JPanel {
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(33, Short.MAX_VALUE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(btnBackToTenantTable)
                 .addContainerGap())
         );
@@ -255,9 +256,15 @@ public class TenantsView extends javax.swing.JPanel {
         );
 
         spTenant.setViewportView(panPayRent);
-        panPayRent.getAccessibleContext().setAccessibleParent(jScrollPane1);
 
         jPanel2.add(spTenant, "card3");
+
+        btnViewUpdates.setText("View Updates");
+        btnViewUpdates.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnViewUpdatesActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -269,36 +276,25 @@ public class TenantsView extends javax.swing.JPanel {
                     .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel1)
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btnViewUpdates))
+                    .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, 680, Short.MAX_VALUE))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel1)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel1)
+                    .addComponent(btnViewUpdates))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, 193, Short.MAX_VALUE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, 184, Short.MAX_VALUE)
+                .addGap(28, 28, 28)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
     }// </editor-fold>//GEN-END:initComponents
-
-    private void btnBackToTenantTableActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackToTenantTableActionPerformed
-        tblTenants.setModel(DbUtils.resultSetToTableModel(tenants.setTenantsTable()));
-       
-        tenants.closeDatabase();
-        btnBackToTenantTable.setVisible(false);
-        jPanel2.removeAll();
-        jPanel2.repaint();
-        jPanel2.revalidate();
-
-        jPanel2.add(tabTenant);
-        jPanel2.repaint();
-        jPanel2.revalidate();
-    }//GEN-LAST:event_btnBackToTenantTableActionPerformed
 
     private void txtTenantEnterBalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtTenantEnterBalActionPerformed
         // TODO add your handling code here:
@@ -351,11 +347,7 @@ public class TenantsView extends javax.swing.JPanel {
 
     private void btnUpdateTenantActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdateTenantActionPerformed
 
-  
-        
-    
-        
-        tenants.updateTenantRent(txtTenantFirst.getText(),  txtTenantLast.getText(), txtTenantPhone.getText(), txtTenantLocation.getText(), txtTenantApartment.getText(), txtTenantEnterBal.getText());
+        tenants.updateTenantRent(txtTenantFirst.getText(), txtTenantLast.getText(), txtTenantPhone.getText(), txtTenantLocation.getText(), txtTenantApartment.getText(), txtTenantEnterBal.getText());
 
         jPanel2.removeAll();
         jPanel2.repaint();
@@ -367,10 +359,31 @@ public class TenantsView extends javax.swing.JPanel {
         btnBackToTenantTable.setVisible(false);
     }//GEN-LAST:event_btnUpdateTenantActionPerformed
 
+    private void btnBackToTenantTableActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackToTenantTableActionPerformed
+        tblTenants.setModel(DbUtils.resultSetToTableModel(tenants.setTenantsTable()));
+
+        tenants.closeDatabase();
+        btnBackToTenantTable.setVisible(false);
+        jPanel2.removeAll();
+        jPanel2.repaint();
+        jPanel2.revalidate();
+
+        jPanel2.add(tabTenant);
+        jPanel2.repaint();
+        jPanel2.revalidate();
+    }//GEN-LAST:event_btnBackToTenantTableActionPerformed
+
+    private void btnViewUpdatesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnViewUpdatesActionPerformed
+        tblTenants.setModel(DbUtils.resultSetToTableModel(tenants.setTenantsTable()));
+        //   System.out.println("tenants.closeDatabase();");
+        tenants.closeDatabase();
+    }//GEN-LAST:event_btnViewUpdatesActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnBackToTenantTable;
     private javax.swing.JButton btnUpdateTenant;
+    private javax.swing.JButton btnViewUpdates;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel2;

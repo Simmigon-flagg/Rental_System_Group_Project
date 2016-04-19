@@ -23,7 +23,7 @@ public class ClientView extends javax.swing.JPanel {
     public ClientView() {
         initComponents();
         btnClientBack.setVisible(false);
-      //  System.out.println("client.setClientTable();");
+        //  System.out.println("client.setClientTable();");
         tblClients.setModel(DbUtils.resultSetToTableModel(client.setClientTable()));
 
         client.closeDatabase();
@@ -67,6 +67,7 @@ public class ClientView extends javax.swing.JPanel {
         txtLastName = new javax.swing.JTextField();
         txtEmployeeIDNumber = new javax.swing.JTextField();
         jLabel9 = new javax.swing.JLabel();
+        btnViewUpdate = new javax.swing.JButton();
 
         btnClientBack.setText("Back");
         btnClientBack.addActionListener(new java.awt.event.ActionListener() {
@@ -308,6 +309,13 @@ public class ClientView extends javax.swing.JPanel {
 
         employeeCardPanel.add(passPanel, "card3");
 
+        btnViewUpdate.setText("View Updates");
+        btnViewUpdate.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnViewUpdateActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -319,18 +327,21 @@ public class ClientView extends javax.swing.JPanel {
                     .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
                         .addComponent(jLabel1)
-                        .addGap(0, 0, Short.MAX_VALUE)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btnViewUpdate)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel1)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel1)
+                    .addComponent(btnViewUpdate))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(employeeCardPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 179, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, Short.MAX_VALUE)
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
     }// </editor-fold>//GEN-END:initComponents
@@ -352,17 +363,16 @@ public class ClientView extends javax.swing.JPanel {
 
         String idClient = (tblClients.getModel().getValueAt(row, 0).toString());
 
-       // System.out.println("Number " + idClient);
+        // System.out.println("Number " + idClient);
         ArrayList<String> arrayList = client.getClientTable(idClient);
 
      //   System.out.println("Number " + idClient);
-
         txtEmployeeIDNumber.setText(arrayList.get(0));
 
         txtName.setText(arrayList.get(1));
         txtLastName.setText(arrayList.get(2));
         txtPassword.setText(arrayList.get(3));
-      //  System.out.println("admins.closeDatabase();");
+        //  System.out.println("admins.closeDatabase();");
         client.closeDatabase();
 
         employeeCardPanel.removeAll();
@@ -401,17 +411,24 @@ public class ClientView extends javax.swing.JPanel {
     }//GEN-LAST:event_txtEmployeeIDNumberActionPerformed
 
     private void btnSubmitEmployeeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSubmitEmployeeActionPerformed
-txtFirstEmployee.getText();
-txtLastEmployee.getText();
-txtDob.getText();
-txtSocialSecurity.getText();
+        txtFirstEmployee.getText();
+        txtLastEmployee.getText();
+        txtDob.getText();
+        txtSocialSecurity.getText();
 // TODO add your handling code here:
     }//GEN-LAST:event_btnSubmitEmployeeActionPerformed
+
+    private void btnViewUpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnViewUpdateActionPerformed
+        tblClients.setModel(DbUtils.resultSetToTableModel(client.setClientTable()));
+
+        client.closeDatabase();
+    }//GEN-LAST:event_btnViewUpdateActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnClientBack;
     private javax.swing.JButton btnSubmitEmployee;
+    private javax.swing.JButton btnViewUpdate;
     private javax.swing.JTabbedPane employPanel;
     private javax.swing.JPanel employeeCardPanel;
     private javax.swing.JButton jButton1;
