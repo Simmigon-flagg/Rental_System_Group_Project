@@ -141,6 +141,7 @@ public class Database {
         return table;
 
     }//End of addNewAdmin
+
     public ResultSet addNewClient(String firstName, String lastName, String dateOfBirth, String password) {
 
         date = new Date();
@@ -162,7 +163,7 @@ public class Database {
                 + "               '" + password + "',\n"
                 + "                '" + 0 + "',\n"
                 + "               '" + 1 + "');";
-        System.out.println("firstName" + "lastName" + "firstName" + "dateOfBirth"+ "password");
+        System.out.println("firstName" + "lastName" + "firstName" + "dateOfBirth" + "password");
         try {
             dbStatement = DatabaseConn().createStatement();
             dbStatement.executeUpdate(sql);
@@ -490,12 +491,11 @@ public class Database {
                 + " AND pass = \'" + password + "\';";
 
         try {
-            
 
             dbStatement = DatabaseConn().createStatement();
 
             rs = dbStatement.executeQuery(sql);
-            
+
             while (rs.next()) {
                 System.out.println("Here Too?");
 //                theemail = rs.getString("userName");
@@ -839,4 +839,28 @@ public class Database {
         return tenantRent;
 
     }//End of updateAdminTable
+
+    public ResultSet setMaintenanceTable() {
+
+        ResultSet table = null;
+        try {
+            dbStatement = DatabaseConn().createStatement();
+            table = dbStatement.executeQuery("SELECT "
+                    + "`maintenance`.`idmaintenance` as Maintenance,\n"
+                    + "    `maintenance`.`iduser` as Person,\n"
+                    + "    `maintenance`.`type` as Type ,\n"
+                    + "    `maintenance`.`description` as Descript,\n"
+                    + "    `maintenance`.`completed` as Status,\n"
+                    + "    `maintenance`.`location` as Location,\n"
+                    + "    `maintenance`.`date`as DateFile \n"
+                    + "FROM `apartrmentrentaldb`.`maintenance`;");
+
+        } catch (SQLException ex) {
+            Logger.getLogger(Database.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        // return ClientRs;
+        //   return ClientRs;
+        return table;
+
+    }//End of setTenant
 }

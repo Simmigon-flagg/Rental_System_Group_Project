@@ -5,6 +5,8 @@
  */
 package Rental_System;
 
+import net.proteanit.sql.DbUtils;
+
 /**
  *
  * @author Simmigon Flagg
@@ -14,8 +16,15 @@ public class MaintenanceView extends javax.swing.JPanel {
     /**
      * Creates new form MaintenanceView
      */
+    Database Main = new Database();
     public MaintenanceView() {
         initComponents();
+        // btnBackToTenantTable.setVisible(false);
+        //  System.out.println("tenants.setTenantsTable();");
+        tableMaintenance.setModel(DbUtils.resultSetToTableModel(Main.setMaintenanceTable()));
+        //   System.out.println("tenants.closeDatabase();");
+        Main.closeDatabase();
+
     }
 
     /**
@@ -39,7 +48,7 @@ public class MaintenanceView extends javax.swing.JPanel {
         jLabel4 = new javax.swing.JLabel();
         jButton2 = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        tableMaintenance = new javax.swing.JTable();
         jPanel2 = new javax.swing.JPanel();
         jButton1 = new javax.swing.JButton();
         jButton5 = new javax.swing.JButton();
@@ -149,7 +158,7 @@ public class MaintenanceView extends javax.swing.JPanel {
 
         jTabbedPane1.addTab("Maintenance Request", jPanel1);
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        tableMaintenance.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -160,7 +169,7 @@ public class MaintenanceView extends javax.swing.JPanel {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
-        jScrollPane1.setViewportView(jTable1);
+        jScrollPane1.setViewportView(tableMaintenance);
 
         jTabbedPane1.addTab("Maintenance Orders", jScrollPane1);
 
@@ -254,7 +263,7 @@ public class MaintenanceView extends javax.swing.JPanel {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTabbedPane jTabbedPane1;
-    private javax.swing.JTable jTable1;
     private javax.swing.JTextArea jTextArea1;
+    private javax.swing.JTable tableMaintenance;
     // End of variables declaration//GEN-END:variables
 }
