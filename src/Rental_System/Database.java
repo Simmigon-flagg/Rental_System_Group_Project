@@ -156,7 +156,7 @@ public class Database {
                 + "                (firstName,lastName,userName,dateOfBirth,pass,is_admin,is_client) \n"
                 + "                VALUES \n"
                 + "                ( '" + firstName + "',\n"
-                + "               '" + lastName + " ',\n"
+                + "               '" + lastName + "',\n"
                 + "               '" + firstName + "',\n"
                 + "              '" + dateOfBirth + "',\n"
                 + "               '" + password + "',\n"

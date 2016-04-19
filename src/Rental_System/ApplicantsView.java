@@ -23,7 +23,7 @@ public class ApplicantsView extends javax.swing.JPanel {
     String application_id = new String();
     String idApplication;
     String tempEmail;
-    
+
     public ApplicantsView() {
         initComponents();
       //  btnToApplication.setVisible(false);
@@ -557,17 +557,17 @@ public class ApplicantsView extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void tblApplicationMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblApplicationMouseClicked
-        
+
         tableAparments.setModel(DbUtils.resultSetToTableModel(application.getApartmentUnit()));
         application.closeDatabase();
         int row = tblApplication.getSelectedRow();
-        
+
         String idApplication = (tblApplication.getModel().getValueAt(row, 0).toString());
-        
+
         System.out.println("Number " + idApplication);
         ArrayList<String> applicationList = application.getApplication(idApplication);
         application_id = applicationList.get(0);
-        
+
         lblApplicantsFullName.setText("Full Name: " + applicationList.get(1) + " " + applicationList.get(2));
         lblPhoneNumber.setText("Phone Number: " + applicationList.get(3));
         tempEmail = applicationList.get(4);
@@ -577,11 +577,11 @@ public class ApplicantsView extends javax.swing.JPanel {
         panApplCard.removeAll();
         panApplCard.repaint();
         panApplCard.revalidate();
-        
+
         panApplCard.add(AddTenant);
         panApplCard.repaint();
         panApplCard.revalidate();
-        
+
 
     }//GEN-LAST:event_tblApplicationMouseClicked
 
@@ -591,21 +591,21 @@ public class ApplicantsView extends javax.swing.JPanel {
 
     private void btnSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSaveActionPerformed
         System.out.println("Simmiigpn");
-        
+
         StringBuilder dateOfBirth = new StringBuilder();
         dateOfBirth.append(txtMonth.getText()).append(txtday.getText()).append(txtYear.getText());
-        
+
         application.addNewApplication(txtApplicationFirstName1.getText(), txtApplicationLastName1.getText(), txtApplicationEmail1.getText(), dateOfBirth.toString(), txtApplicationSSN1.getText(), txtApplicationAddress1.getText(), txtApplicationCity1.getText(), cboxApplicationState1.getSelectedItem().toString(), txtApplicationZip1.getText(), txtApplicationPhone1.getText(), txtApplicationEmployee1.getText(), txtJobs.getText(), txtApplicationIncome1.getText());
         application.closeDatabase();
-        
+
         panApplCard.removeAll();
         panApplCard.repaint();
         panApplCard.revalidate();
-        
+
         panApplCard.add(tabApplicants);
         panApplCard.repaint();
         panApplCard.revalidate();
-        
+
         tblApplication.setModel(DbUtils.resultSetToTableModel(application.setApplicationTable()));
         application.closeDatabase();
         ClearTextBox();
@@ -644,13 +644,15 @@ public class ApplicantsView extends javax.swing.JPanel {
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void btnSubmitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSubmitActionPerformed
-        
+
         System.out.println("cboxAccept.getSelectedItem() " + cboxAccept.getSelectedIndex() + "\n  cboxBackground.getSelectedIndex()" + cboxBackground.getSelectedIndex());
         System.out.println(application_id + " <--- peronsUs " + apartmentListPrice.get(2));
         System.out.println("Final values accceted: " + cboxAccept.getSelectedIndex() + "backgrount"
                 + "\n " + cboxBackground.getSelectedIndex() + "\n " + application_id + "\n" + application_id + "\n" + idApplication + "\n" + tempEmail);
         application.addTenant(cboxAccept.getSelectedIndex(), cboxBackground.getSelectedIndex(), application_id, idApplication, tempEmail);
-        
+        Mail sendmail = new Mail();
+        sendmail.mailReport(tempEmail, lblApplicantsFullName.getText(), lblLocation.getText(), lblUnit.getText());
+
         lblLocation.setText("");
         lblUnit.setText("");
         lblRent.setText("");
@@ -663,17 +665,14 @@ public class ApplicantsView extends javax.swing.JPanel {
         panApplCard.removeAll();
         panApplCard.repaint();
         panApplCard.revalidate();
-        
+
         panApplCard.add(tabApplicants);
         panApplCard.repaint();
         panApplCard.revalidate();
-        
+
         tblApplication.setModel(DbUtils.resultSetToTableModel(application.setApplicationTable()));
         application.closeDatabase();
-        
-       
-    
-        
+
 
     }//GEN-LAST:event_btnSubmitActionPerformed
 
@@ -684,10 +683,10 @@ public class ApplicantsView extends javax.swing.JPanel {
         lblbeds.setText("");
         lblBaths.setText("");
         int row = tableAparments.getSelectedRow();
-        
+
         idApplication = (tableAparments.getModel().getValueAt(row, 0).toString());
         apartmentListPrice = application.getApartmentUnitAndPrice(idApplication);
-        
+
         application.closeDatabase();
         System.out.println("" + apartmentListPrice.toString());
         lblLocation.setText("Location: " + apartmentListPrice.get(1));
@@ -708,17 +707,17 @@ public class ApplicantsView extends javax.swing.JPanel {
         panApplCard.removeAll();
         panApplCard.repaint();
         panApplCard.revalidate();
-        
+
         panApplCard.add(tabApplicants);
         panApplCard.repaint();
         panApplCard.revalidate();
         // btnToApplication.setVisible(false);
     }//GEN-LAST:event_btnCancelActionPerformed
     public void ClearTextBox() {
-        
+
         txtApplicationFirstName1.setText("");
         txtApplicationLastName1.setText("");
-        
+
         txtApplicationSSN1.setText("");
         txtApplicationEmail1.setText("");
         txtApplicationAddress1.setText("");
@@ -729,7 +728,7 @@ public class ApplicantsView extends javax.swing.JPanel {
         txtApplicationEmployee1.setText("");
         txtJobs.setText("");
         txtApplicationIncome1.setText("");
-        
+
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
