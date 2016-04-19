@@ -141,6 +141,41 @@ public class Database {
         return table;
 
     }//End of addNewAdmin
+    public ResultSet addNewClient(String firstName, String lastName, String dateOfBirth, String password) {
+
+        date = new Date();
+        time = date.toString().split(" ");
+        ResultSet table = null;
+        for (int i = 0; i < time.length; i++) {
+            String time1 = time[i];
+            System.out.println("time: [" + i + "] " + time[i]);
+            currentTime += time1 + " ";
+        }
+
+        sql = "INSERT INTO user \n"
+                + "                (firstName,lastName,userName,dateOfBirth,pass,is_admin,is_client) \n"
+                + "                VALUES \n"
+                + "                ( '" + firstName + "',\n"
+                + "               '" + lastName + " ',\n"
+                + "               '" + firstName + "',\n"
+                + "              '" + dateOfBirth + "',\n"
+                + "               '" + password + "',\n"
+                + "                '" + 0 + "',\n"
+                + "               '" + 1 + "');";
+        System.out.println("firstName" + "lastName" + "firstName" + "dateOfBirth"+ "password");
+        try {
+            dbStatement = DatabaseConn().createStatement();
+            dbStatement.executeUpdate(sql);
+
+            table = dbStatement.executeQuery("SELECT * FROM clients");
+
+        } catch (SQLException ex) {
+            Logger.getLogger(Database.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        return table;
+
+    }
 
     //setClientTable
     public ResultSet setClientTable() {
