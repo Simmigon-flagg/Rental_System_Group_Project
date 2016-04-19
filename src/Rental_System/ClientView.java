@@ -118,8 +118,20 @@ public class ClientView extends javax.swing.JPanel {
 
         employPanel.addTab("Employees", jScrollPane1);
 
+<<<<<<< HEAD
         btnSubmitEmployee.setText("Submit ");
         btnSubmitEmployee.addActionListener(new java.awt.event.ActionListener() {
+=======
+        jLabel2.setText("First");
+
+        jLabel3.setText("Last");
+
+        jLabel4.setText("Birth Date");
+
+        jLabel5.setText("Password");
+
+        txtFirstEmployee.addActionListener(new java.awt.event.ActionListener() {
+>>>>>>> origin/master
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnSubmitEmployeeActionPerformed(evt);
             }
@@ -157,11 +169,25 @@ public class ClientView extends javax.swing.JPanel {
                     .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+<<<<<<< HEAD
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(txtSocialSecurity, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txtLastEmployee, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txtDob, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txtFirstEmployee, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE))
+=======
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addComponent(txtSocialSecurity, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 372, Short.MAX_VALUE)
+                        .addComponent(btnSubmitEmployee, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(txtLastEmployee, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtDob, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtFirstEmployee, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(0, 0, Short.MAX_VALUE)))
+>>>>>>> origin/master
                 .addContainerGap())
         );
 
@@ -429,11 +455,20 @@ public class ClientView extends javax.swing.JPanel {
     }//GEN-LAST:event_txtEmployeeIDNumberActionPerformed
 
     private void btnSubmitEmployeeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSubmitEmployeeActionPerformed
+<<<<<<< HEAD
         txtFirstEmployee.getText();
         txtLastEmployee.getText();
         txtDob.getText();
         txtSocialSecurity.getText();
         //client.`
+=======
+        client.addNewClient(txtFirstEmployee.getText(),txtLastEmployee.getText(),txtDob.getText(),txtSocialSecurity.getText());
+        
+        tblClients.setModel(DbUtils.resultSetToTableModel(client.setClientTable()));
+        client.closeDatabase();
+        ClearTextBox();
+// TODO add your handling code here:
+>>>>>>> origin/master
     }//GEN-LAST:event_btnSubmitEmployeeActionPerformed
 
     private void btnViewUpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnViewUpdateActionPerformed
@@ -445,7 +480,14 @@ public class ClientView extends javax.swing.JPanel {
     private void txtSocialSecurityActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtSocialSecurityActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtSocialSecurityActionPerformed
+ public void ClearTextBox() {
 
+      txtFirstEmployee.setText("");
+      txtLastEmployee.setText("");
+      txtDob.setText("");
+      txtSocialSecurity.setText("");
+
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnClientBack;
